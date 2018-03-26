@@ -16,7 +16,7 @@ public class TraitGr extends Rectangle{
 	private Etat stroke = Etat.stroke;
 	private int ligne;
 	private int col;
-	private Pion pion = null;
+	private boolean pionPlace = false;
 
 	public TraitGr(double startX, double startY, double endX, double endY, int x, int y) {
 		super(startX, startY, endX, endY);
@@ -75,15 +75,17 @@ public class TraitGr extends Rectangle{
 		this.col = col;
 	}
 
-	public Pion getPion() {
-		return pion;
+	public void placePion() {
+		this.pionPlace = true;
+	}	
+	
+	public void supprPion(){
+		this.pionPlace = false;
 	}
 
-	public void setPion(Pion pion) {
-		this.pion = pion;
+	public boolean isPlace(){
+		return pionPlace;
 	}
-
-
 	
 
 	

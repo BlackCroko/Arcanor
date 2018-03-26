@@ -101,7 +101,7 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 		pion.setOnMouseClicked(this);
         for(TraitGr test : grille){
         	if(test.getLigne() == pion.getLigne() && test.getCol() == pion.getCol())
-        	test.setPion(pion);
+        	test.placePion();
         }
 		troupe.getChildren().add(pion);
 	}
@@ -168,43 +168,43 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	    	  int y = pionSelectionne.getCol();
 	    	  for(TraitGr test : grille){
 	    		  if(test.getLigne() == x+1 && test.getCol() == y+1){
-	    			  if(test.getPion() == null)
+	    			  if(!test.isPlace())
 	    			  test.ispossible();
 	    			  else test.isimpossible();
 	    		  }
 	    		  if(test.getLigne() == x && test.getCol() == y+1){
-	    			  if(test.getPion() == null)
+	    			  if(!test.isPlace())
 	    			  test.ispossible();
 	    			  else test.isimpossible();
 	    		  }
 	    		  if(test.getLigne() == x-1 && test.getCol() == y+1){
-	    			  if(test.getPion() == null)
+	    			  if(!test.isPlace())
 	    			  test.ispossible();
 	    			  else test.isimpossible();
 	    		  }
 	    		  if(test.getLigne() == x+1 && test.getCol() == y){
-	    			  if(test.getPion() == null)
+	    			  if(!test.isPlace())
 	    			  test.ispossible();
 	    			  else test.isimpossible();
 	    		  }
 	    		  if(test.getLigne() == x+1 && test.getCol() == y-1){
-	    			  if(test.getPion() == null)
+	    			  if(!test.isPlace())
 	    			  test.ispossible();
 	    			  else test.isimpossible();
 	    			  
 	    		  }
 	    		  if(test.getLigne() == x && test.getCol() == y-1){
-	    			  if(test.getPion() == null)
+	    			  if(!test.isPlace())
 	    			  test.ispossible();
 	    			  else test.isimpossible();
 	    		  }
 	    		  if(test.getLigne() == x-1 && test.getCol() == y-1){
-	    			  if(test.getPion() == null)
+	    			  if(!test.isPlace())
 	    			  test.ispossible();
 	    			  else test.isimpossible();
 	    		  }
 	    		  if(test.getLigne() == x-1 && test.getCol() == y){
-	    			  if(test.getPion() == null)
+	    			  if(!test.isPlace())
 	    			  test.ispossible();
 	    			  else test.isimpossible();
 	    		  } 
@@ -223,6 +223,9 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	      {
 	        TraitGr r = (TraitGr)o;
 	        if(r.getEtat() == Etat.possible){
+	        	int x = pionSelectionne.getLigne();
+	        	int y = pionSelectionne.getCol();
+	        	
 	        //le nouveau centre du jeton sera au centre du rectangle sélectionné
 	        double newX =  r.getX()  + tailleCase/2;
 	        double newY =  r.getY() + tailleCase/2;
@@ -238,10 +241,17 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	        timeline.play();
 	        pionSelectionne.setLigne(r.getLigne());
 	        pionSelectionne.setCol(r.getCol());
-	        pionSelectionne = null;
 	        for(TraitGr test : grille){
+	        	if(test.getLigne() == x && test.getCol() == y){
+	        		test.supprPion();
+	        	}
+	        	if(test.getLigne() == pionSelectionne.getLigne() && test.getCol() == pionSelectionne.getCol()){
+	        		test.placePion();
+	        	}
 	        	test.resetColor();
 	        }
+
+	        pionSelectionne = null;
 	      }
 	   }
 	}

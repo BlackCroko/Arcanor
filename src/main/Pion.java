@@ -73,7 +73,6 @@ public class Pion extends Circle{
 	public void setCol(int col) {
 		this.col = col;
 	}
-	  
-	  
+
 	  
 }
