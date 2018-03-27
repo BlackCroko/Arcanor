@@ -2,10 +2,11 @@ package main;
 
 import java.util.ArrayList;
 
-import Entity.Etat;
-import Entity.Joueur;
-import Entity.Pion;
-import Entity.Case;
+import Entite.Case;
+import Entite.Etat;
+import Entite.Joueur;
+import Entite.Pion;
+import Entite.Plateau;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
@@ -34,6 +35,7 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	
 	Pion pionSelectionne;
 	ArrayList<Case> grille = new ArrayList();
+	Plateau plateau = new Plateau();
 
 	Joueur J1 = new Joueur(Etat.J1, true);
 	Joueur J2 = new Joueur(Etat.J2, false);
@@ -61,7 +63,7 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 		Group troupe = new Group();
 		Scene scene = new Scene(troupe, tailleCase + (nbCol) * tailleCase, tailleCase + (nbLigne) * tailleCase,
 				Color.ANTIQUEWHITE);
-		primaryStage.setTitle("Jeu Du Carre...");
+		primaryStage.setTitle("Arcanor");
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		// definir les acteurs et les habiller

@@ -4,7 +4,7 @@
  * @author Romain Thuillez
  */
 
-package Entity;
+package Entite;
 
 import java.awt.Color;
 

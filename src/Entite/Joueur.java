@@ -7,7 +7,7 @@
  * @author Romain Thuillez
  */
 
-package Entity;
+package Entite;
 
 import javafx.scene.Group;
 
