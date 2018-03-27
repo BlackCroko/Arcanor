@@ -1,8 +1,5 @@
 package main;
 
-import java.util.ArrayList;
-
-import Entite.Case;
 import Entite.Etat;
 import Entite.Joueur;
 import Entite.Plateau;
@@ -20,8 +17,6 @@ public class Appli extends Application {
 	int decalageTrait;
 	int decalage;
 	boolean rejouer = false;
-	
-	ArrayList<Case> grille = new ArrayList();
 
 	Joueur J1 = new Joueur(Etat.J1, true);
 	Joueur J2 = new Joueur(Etat.J2, false);
@@ -54,7 +49,7 @@ public class Appli extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		// definir les acteurs et les habiller
-		plateau.dessinEnvironnement(troupe);
+		troupe = plateau.dessinEnvironnement();
 		// afficher le theatre
 		primaryStage.show();
 	}

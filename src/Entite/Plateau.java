@@ -23,7 +23,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 		Group troupe = new Group();
 	}
 
-	public void dessinEnvironnement(Group troupe) {
+	public Group dessinEnvironnement() {
 		Case trait = null;
 		Pion pion = null;
 		// dessin des lignes
@@ -44,6 +44,8 @@ public class Plateau implements EventHandler<MouseEvent> {
 			System.out.println(rand);
 			ajoutPion(pion, i, i, false, troupe);
 		}
+		
+		return troupe;
 
 	}
 
