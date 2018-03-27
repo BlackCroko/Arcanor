@@ -9,18 +9,13 @@ import Entite.Pion;
 import Entite.Plateau;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
-import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -35,7 +30,6 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	
 	Pion pionSelectionne;
 	ArrayList<Case> grille = new ArrayList();
-	Plateau plateau = new Plateau();
 
 	Joueur J1 = new Joueur(Etat.J1, true);
 	Joueur J2 = new Joueur(Etat.J2, false);
@@ -60,6 +54,7 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	/** construction du théatre et de la scène */
 	void construirePlateauJeu(Stage primaryStage) {
 		// definir la scene principale
+		Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait);
 		Group troupe = new Group();
 		Scene scene = new Scene(troupe, tailleCase + (nbCol) * tailleCase, tailleCase + (nbLigne) * tailleCase,
 				Color.ANTIQUEWHITE);
@@ -67,7 +62,7 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		// definir les acteurs et les habiller
-		dessinEnvironnement(troupe);
+		plateau.dessinEnvironnement(troupe);
 		// afficher le theatre
 		primaryStage.show();
 	}
@@ -80,48 +75,12 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	/**
 	 *  *creation des cellules et de leurs habits  
 	 */
-	void dessinEnvironnement(Group troupe) {
-		Case trait = null;
-		Pion pion = null;
-		// dessin des lignes
-		for (int i = 0; i < nbCol; i++) {
-			for (int j = 0; j < nbLigne; j++) {
-					trait = new Case(decalage + tailleCase * i, decalage + decalageTrait + tailleCase * j,
-							tailleCase, tailleCase, i, j);
-					ajoutTrait(trait, i, j, false, troupe);
-				
-			}
-		}
-		for(int i = 0; i < 6; i++){
-			int rand = (int) (Math.random()*4)+2;
-			int rand2 = (int) (Math.random()*2);
-			pion = new Pion(decalage + tailleCase * i + tailleCase/2, decalage + decalageTrait + tailleCase * i + tailleCase/2,
-					tailleCase/rand, rand2, i, i);
-			System.out.println(rand);
-			ajoutPion(pion, i, i, false, troupe);
-		}
-
-	}
-	
-	void ajoutPion(Pion pion, int i, int j, boolean horizontal, Group troupe) {
-		pion.setOnMouseClicked(this);
-        for(Case test : grille){
-        	if(test.getLigne() == pion.getLigne() && test.getCol() == pion.getCol())
-        	test.placePion();
-        }
-		troupe.getChildren().add(pion);
-	}
 
 	/**
 	 *  *dessins des traits et place un trait de la couleur du joueur qui clic
 	 * dessus  
 	 */
-	void ajoutTrait(Case trait, int i, int j, boolean horizontal, Group troupe) {
-		troupe.getChildren().add(trait);
-		grille.add(trait);
-		trait.setOnMouseClicked(this);
 
-	}
 
 	/**
 	 *  *lorsqu'un joueur a joué, on definit l'autre joueur comme joueur actif
