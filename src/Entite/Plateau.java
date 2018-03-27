@@ -15,23 +15,22 @@ public class Plateau implements EventHandler<MouseEvent> {
 	int tailleCase;
 	int decalageTrait;
 	Pion pionSelectionne;
+	Group troupe = new Group();
 
 	public Plateau(int decalage, int tailleCase, int decalageTrait) {
 		this.decalage = decalage;
 		this.tailleCase = tailleCase;
 		this.decalageTrait = decalageTrait;
-		Group troupe = new Group();
 	}
 
 	public Group dessinEnvironnement() {
-		Case trait = null;
 		Pion pion = null;
 		// dessin des lignes
 		for (int i = 0; i < grille.length; i++) {
 			for (int j = 0; j < grille[i].length; j++) {
 				grille[i][j] = new Case(decalage + tailleCase * i, decalage + decalageTrait + tailleCase * j,
 						tailleCase, tailleCase, i, j);
-				troupe.getChildren().add(trait);
+				troupe.getChildren().add(grille[i][j]);
 				grille[i][j].setOnMouseClicked(this);
 
 			}
