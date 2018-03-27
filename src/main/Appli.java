@@ -43,13 +43,13 @@ public class Appli extends Application {
 		// definir la scene principale
 		Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait);
 		Group troupe = new Group();
+		troupe = plateau.dessinEnvironnement();
 		Scene scene = new Scene(troupe, tailleCase + (nbCol) * tailleCase, tailleCase + (nbLigne) * tailleCase,
 				Color.ANTIQUEWHITE);
 		primaryStage.setTitle("Arcanor");
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		// definir les acteurs et les habiller
-		troupe = plateau.dessinEnvironnement();
 		// afficher le theatre
 		primaryStage.show();
 	}
