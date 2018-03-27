@@ -44,7 +44,7 @@ public class Appli extends Application {
 		Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait);
 		Group troupe = new Group();
 		troupe = plateau.dessinEnvironnement();
-		Scene scene = new Scene(troupe, tailleCase + (nbCol) * tailleCase, tailleCase + (nbLigne+1) * tailleCase,
+		Scene scene = new Scene(troupe, tailleCase + (nbCol) * tailleCase, tailleCase + (nbLigne) * tailleCase,
 				Color.ANTIQUEWHITE);
 		primaryStage.setTitle("Arcanor");
 		primaryStage.setScene(scene);

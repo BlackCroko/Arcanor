@@ -10,7 +10,7 @@ import javafx.util.Duration;
 
 public class Plateau implements EventHandler<MouseEvent> {
 
-	Case[][] grille = new Case[7][8];
+	Case[][] grille = new Case[8][7];
 	int decalage;
 	int tailleCase;
 	int decalageTrait;
