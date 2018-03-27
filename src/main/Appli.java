@@ -2,6 +2,10 @@ package main;
 
 import java.util.ArrayList;
 
+import Entity.Etat;
+import Entity.Joueur;
+import Entity.Pion;
+import Entity.Case;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
@@ -29,7 +33,7 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	boolean rejouer = false;
 	
 	Pion pionSelectionne;
-	ArrayList<TraitGr> grille = new ArrayList();
+	ArrayList<Case> grille = new ArrayList();
 
 	Joueur J1 = new Joueur(Etat.J1, true);
 	Joueur J2 = new Joueur(Etat.J2, false);
@@ -75,12 +79,12 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	 *  *creation des cellules et de leurs habits  
 	 */
 	void dessinEnvironnement(Group troupe) {
-		TraitGr trait = null;
+		Case trait = null;
 		Pion pion = null;
 		// dessin des lignes
 		for (int i = 0; i < nbCol; i++) {
 			for (int j = 0; j < nbLigne; j++) {
-					trait = new TraitGr(decalage + tailleCase * i, decalage + decalageTrait + tailleCase * j,
+					trait = new Case(decalage + tailleCase * i, decalage + decalageTrait + tailleCase * j,
 							tailleCase, tailleCase, i, j);
 					ajoutTrait(trait, i, j, false, troupe);
 				
@@ -99,7 +103,7 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	
 	void ajoutPion(Pion pion, int i, int j, boolean horizontal, Group troupe) {
 		pion.setOnMouseClicked(this);
-        for(TraitGr test : grille){
+        for(Case test : grille){
         	if(test.getLigne() == pion.getLigne() && test.getCol() == pion.getCol())
         	test.placePion();
         }
@@ -110,7 +114,7 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	 *  *dessins des traits et place un trait de la couleur du joueur qui clic
 	 * dessus  
 	 */
-	void ajoutTrait(TraitGr trait, int i, int j, boolean horizontal, Group troupe) {
+	void ajoutTrait(Case trait, int i, int j, boolean horizontal, Group troupe) {
 		troupe.getChildren().add(trait);
 		grille.add(trait);
 		trait.setOnMouseClicked(this);
@@ -166,7 +170,7 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	    	  pionSelectionne=d;
 	    	  int x = pionSelectionne.getLigne();
 	    	  int y = pionSelectionne.getCol();
-	    	  for(TraitGr test : grille){
+	    	  for(Case test : grille){
 	    		  if(test.getLigne() == x+1 && test.getCol() == y+1){
 	    			  if(!test.isPlace())
 	    			  test.ispossible();
@@ -212,16 +216,16 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	      }
 	      else{
 	    	  pionSelectionne=null;
-	    	  for(TraitGr test : grille){
+	    	  for(Case test : grille){
 		        	test.resetColor();
 		        }
 	      }
 	    }
 	  }
 	  else
-	      if(o instanceof TraitGr && pionSelectionne!=null)
+	      if(o instanceof Case && pionSelectionne!=null)
 	      {
-	        TraitGr r = (TraitGr)o;
+	        Case r = (Case)o;
 	        if(r.getEtat() == Etat.possible){
 	        	int x = pionSelectionne.getLigne();
 	        	int y = pionSelectionne.getCol();
@@ -236,12 +240,12 @@ public class Appli extends Application implements EventHandler<MouseEvent> {
 	          new KeyFrame(new Duration(tps), 
 	                new KeyValue(pionSelectionne.centerXProperty(), newX),
 	                new KeyValue(pionSelectionne.centerYProperty(), newY),
-	                new KeyValue(pionSelectionne.fillProperty(), pionSelectionne.cj)
+	                new KeyValue(pionSelectionne.fillProperty(), pionSelectionne.getCj())
 	                ));
 	        timeline.play();
 	        pionSelectionne.setLigne(r.getLigne());
 	        pionSelectionne.setCol(r.getCol());
-	        for(TraitGr test : grille){
+	        for(Case test : grille){
 	        	if(test.getLigne() == x && test.getCol() == y){
 	        		test.supprPion();
 	        	}

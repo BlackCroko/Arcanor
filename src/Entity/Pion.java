@@ -1,4 +1,4 @@
-package main;
+package Entity;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -72,6 +72,14 @@ public class Pion extends Circle{
 
 	public void setCol(int col) {
 		this.col = col;
+	}
+
+	public Color getCj() {
+		return cj;
+	}
+
+	public void setCj(Color cj) {
+		this.cj = cj;
 	}
 
 	  

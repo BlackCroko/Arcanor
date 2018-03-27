@@ -1,16 +1,16 @@
 
 /**
- * Classe de gestion des Traits 
+ * Classe de gestion des Cases 
  * @author Romain Thuillez
  */
 
-package main;
+package Entity;
 
 import java.awt.Color;
 
 import javafx.scene.shape.Rectangle;
 
-public class TraitGr extends Rectangle{
+public class Case extends Rectangle{
 	
 	private Etat etat = Etat.LIBRE;
 	private Etat stroke = Etat.stroke;
@@ -18,7 +18,7 @@ public class TraitGr extends Rectangle{
 	private int col;
 	private boolean pionPlace = false;
 
-	public TraitGr(double startX, double startY, double endX, double endY, int x, int y) {
+	public Case(double startX, double startY, double endX, double endY, int x, int y) {
 		super(startX, startY, endX, endY);
 	    this.setFill(etat.getCouleur());
 	    this.setStroke(stroke.getCouleur());

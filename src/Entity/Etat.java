@@ -1,4 +1,4 @@
-package main;
+package Entity;
 
 import javafx.scene.paint.Color;
 
