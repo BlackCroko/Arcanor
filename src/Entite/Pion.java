@@ -19,9 +19,6 @@ public class Pion extends Circle{
 	/**couleur pour joueur 2 si jeton selectionne*/
 	public static Color couleurJ2Selected = Color.FORESTGREEN;
 	
-	private Etat etat;
-	private Etat stroke = Etat.stroke;
-	
 	private int ligne;
 	private int col;
 

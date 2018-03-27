@@ -9,8 +9,6 @@
 
 package Entite;
 
-import javafx.scene.Group;
-
 public class Joueur {
 	private Etat couleur;
 	private int point = 0;
