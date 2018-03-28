@@ -6,8 +6,6 @@
 
 package Entite;
 
-import java.awt.Color;
-
 import javafx.scene.shape.Rectangle;
 
 public class Case extends Rectangle{
