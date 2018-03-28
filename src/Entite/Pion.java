@@ -1,7 +1,11 @@
 package Entite;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 public class Pion extends Circle{
 	
@@ -39,6 +43,23 @@ public class Pion extends Circle{
 	    this.ligne = ligne;
 	    this.col = col;
 	  }
+	
+	public void deplacement(int i, int j, double x, double y){
+		int tps = 300;
+		Timeline timeline = new Timeline();
+		if(fils != null){
+		timeline.getKeyFrames()
+				.addAll(new KeyFrame(new Duration(tps), new KeyValue(fils.centerXProperty(), x),
+						new KeyValue(fils.centerYProperty(), y),
+						new KeyValue(fils.fillProperty(), fils.getCj())));
+		}
+		timeline.getKeyFrames()
+		.addAll(new KeyFrame(new Duration(tps), new KeyValue(this.centerXProperty(), x),
+				new KeyValue(this.centerYProperty(), y),
+				new KeyValue(this.fillProperty(), this.getCj())));
+		timeline.play();
+		
+	}
 	   
 	  /**active ou desactive la selection du jeton*/
 	  public void switchSelected()

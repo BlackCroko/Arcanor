@@ -88,7 +88,9 @@ public class Case extends Rectangle{
 		else return false;
 	}
 	
-
+	public Pion Contenu(){
+		return pionPlace;
+	}
 	
 
 }

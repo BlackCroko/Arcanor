@@ -35,14 +35,14 @@ public class Plateau implements EventHandler<MouseEvent> {
 
 			}
 		}
+		int rand = 1;
 		for (int i = 0; i < 8; i++) {
 			for(int j = 0; j< 2; j++){
-			int rand = (int) (Math.random() * 4) + 1;
+			rand =4 - i % 4;
 			int rand2 = (int) (Math.random() * 2);
 			pion = new Pion(decalage + tailleCase * i + tailleCase / 2,
-					decalage + decalageTrait + tailleCase * j + tailleCase / 2, tailleCase/2, rand, rand2, i, j);
-			System.out.println(rand);
-			ajoutPion(pion, i, j, false, troupe);
+					decalage + decalageTrait + tailleCase * j*6 + tailleCase / 2, tailleCase/2, rand, rand2, i, j*6);
+			ajoutPion(pion, i, j*6, false, troupe);
 			}
 		}
 		return troupe;
@@ -137,18 +137,21 @@ public class Plateau implements EventHandler<MouseEvent> {
 			if (r.getEtat() == Etat.possible) {
 				int x = pionSelectionne.getLigne();
 				int y = pionSelectionne.getCol();
-
+				if(r.Contenu()!=null)
+				pionSelectionne.setFils(r.Contenu());
+				//System.out.println(r.Contenu());
 				// le nouveau centre du jeton sera au centre du rectangle sélectionné
 				double newX = r.getX() + tailleCase / 2;
 				double newY = r.getY() + tailleCase / 2;
 				int tps = 300;
 				pionSelectionne.switchSelected();
-				Timeline timeline = new Timeline();
+				pionSelectionne.deplacement(r.getLigne(), r.getCol(), newX, newY);
+				/*Timeline timeline = new Timeline();
 				timeline.getKeyFrames()
 						.addAll(new KeyFrame(new Duration(tps), new KeyValue(pionSelectionne.centerXProperty(), newX),
 								new KeyValue(pionSelectionne.centerYProperty(), newY),
 								new KeyValue(pionSelectionne.fillProperty(), pionSelectionne.getCj())));
-				timeline.play();
+				timeline.play();*/
 				pionSelectionne.setLigne(r.getLigne());
 				pionSelectionne.setCol(r.getCol());
 				for (int i = 0; i < grille.length; i++) {
