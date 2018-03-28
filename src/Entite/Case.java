@@ -16,7 +16,7 @@ public class Case extends Rectangle{
 	private Etat stroke = Etat.stroke;
 	private int ligne;
 	private int col;
-	private boolean pionPlace = false;
+	private Pion pionPlace = null;
 
 	public Case(double startX, double startY, double endX, double endY, int x, int y) {
 		super(startX, startY, endX, endY);
@@ -75,16 +75,19 @@ public class Case extends Rectangle{
 		this.col = col;
 	}
 
-	public void placePion() {
-		this.pionPlace = true;
+	public void placePion(Pion pion) {
+		this.pionPlace = pion;
 	}	
 	
 	public void supprPion(){
-		this.pionPlace = false;
+		this.pionPlace = null;
 	}
 
-	public boolean isPlace(){
-		return pionPlace;
+	public boolean isJouable(Pion pion){
+		
+		if(pionPlace == null || (pion.getTaille() == pionPlace.getTaille()-1))
+		return true;
+		else return false;
 	}
 	
 

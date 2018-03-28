@@ -21,11 +21,17 @@ public class Pion extends Circle{
 	
 	private int ligne;
 	private int col;
+	private int taille;
+	private int point;
+	
+	private Pion fils = null;
 
-	public Pion(double startX, double startY, double taille, int _joueur, int ligne, int col) {
-		super(startX, startY, taille);
+	public Pion(double startX, double startY, double taillebase, int taille, int _joueur, int ligne, int col) {
+		super(startX, startY, taillebase/taille);
 	   /* this.setFill(Couleur.getCouleur());
 	    this.setStroke(stroke.getCouleur());*/
+		this.taille = taille;
+		this.point = 5-taille;
 	    joueur = _joueur;
 	    selected = false;
 	    getColorPion();
@@ -77,6 +83,22 @@ public class Pion extends Circle{
 
 	public void setCj(Color cj) {
 		this.cj = cj;
+	}
+
+	public Pion getFils() {
+		return fils;
+	}
+
+	public void setFils(Pion fils) {
+		this.fils = fils;
+	}
+
+	public int getTaille() {
+		return taille;
+	}
+
+	public int getPoint() {
+		return point;
 	}
 
 	  

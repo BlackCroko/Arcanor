@@ -35,22 +35,23 @@ public class Plateau implements EventHandler<MouseEvent> {
 
 			}
 		}
-		for (int i = 0; i < 6; i++) {
-			int rand = (int) (Math.random() * 4) + 2;
+		for (int i = 0; i < 8; i++) {
+			for(int j = 0; j< 2; j++){
+			int rand = (int) (Math.random() * 4) + 1;
 			int rand2 = (int) (Math.random() * 2);
 			pion = new Pion(decalage + tailleCase * i + tailleCase / 2,
-					decalage + decalageTrait + tailleCase * i + tailleCase / 2, tailleCase / rand, rand2, i, i);
+					decalage + decalageTrait + tailleCase * j + tailleCase / 2, tailleCase/2, rand, rand2, i, j);
 			System.out.println(rand);
-			ajoutPion(pion, i, i, false, troupe);
+			ajoutPion(pion, i, j, false, troupe);
+			}
 		}
-		
 		return troupe;
 
 	}
 
 	void ajoutPion(Pion pion, int i, int j, boolean horizontal, Group troupe) {
 		pion.setOnMouseClicked(this);
-		grille[pion.getLigne()][pion.getCol()].placePion();
+		grille[pion.getLigne()][pion.getCol()].placePion(pion);
 		troupe.getChildren().add(pion);
 	}
 
@@ -72,50 +73,50 @@ public class Plateau implements EventHandler<MouseEvent> {
 					for (int i = 0; i < grille.length; i++) {
 						for (int j = 0; j < grille[i].length; j++) {
 							if (grille[i][j].getLigne() == x + 1 && grille[i][j].getCol() == y + 1) {
-								if (!grille[i][j].isPlace())
+								if (grille[i][j].isJouable(pionSelectionne))
 									grille[i][j].ispossible();
 								else
 									grille[i][j].isimpossible();
 							}
 							if (grille[i][j].getLigne() == x && grille[i][j].getCol() == y + 1) {
-								if (!grille[i][j].isPlace())
+								if (grille[i][j].isJouable(pionSelectionne))
 									grille[i][j].ispossible();
 								else
 									grille[i][j].isimpossible();
 							}
 							if (grille[i][j].getLigne() == x - 1 && grille[i][j].getCol() == y + 1) {
-								if (!grille[i][j].isPlace())
+								if (grille[i][j].isJouable(pionSelectionne))
 									grille[i][j].ispossible();
 								else
 									grille[i][j].isimpossible();
 							}
 							if (grille[i][j].getLigne() == x + 1 && grille[i][j].getCol() == y) {
-								if (!grille[i][j].isPlace())
+								if (grille[i][j].isJouable(pionSelectionne))
 									grille[i][j].ispossible();
 								else
 									grille[i][j].isimpossible();
 							}
 							if (grille[i][j].getLigne() == x + 1 && grille[i][j].getCol() == y - 1) {
-								if (!grille[i][j].isPlace())
+								if (grille[i][j].isJouable(pionSelectionne))
 									grille[i][j].ispossible();
 								else
 									grille[i][j].isimpossible();
 
 							}
 							if (grille[i][j].getLigne() == x && grille[i][j].getCol() == y - 1) {
-								if (!grille[i][j].isPlace())
+								if (grille[i][j].isJouable(pionSelectionne))
 									grille[i][j].ispossible();
 								else
 									grille[i][j].isimpossible();
 							}
 							if (grille[i][j].getLigne() == x - 1 && grille[i][j].getCol() == y - 1) {
-								if (!grille[i][j].isPlace())
+								if (grille[i][j].isJouable(pionSelectionne))
 									grille[i][j].ispossible();
 								else
 									grille[i][j].isimpossible();
 							}
 							if (grille[i][j].getLigne() == x - 1 && grille[i][j].getCol() == y) {
-								if (!grille[i][j].isPlace())
+								if (grille[i][j].isJouable(pionSelectionne))
 									grille[i][j].ispossible();
 								else
 									grille[i][j].isimpossible();
@@ -157,7 +158,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 						}
 						if (grille[i][j].getLigne() == pionSelectionne.getLigne()
 								&& grille[i][j].getCol() == pionSelectionne.getCol()) {
-							grille[i][j].placePion();
+							grille[i][j].placePion(pionSelectionne);
 						}
 						grille[i][j].resetColor();
 					}
