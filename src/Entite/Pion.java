@@ -101,5 +101,9 @@ public class Pion extends Circle{
 		return point;
 	}
 
+	public int getJoueur() {
+		return joueur;
+	}
+
 	  
 }
