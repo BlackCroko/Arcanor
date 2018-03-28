@@ -9,7 +9,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 public class Plateau implements EventHandler<MouseEvent> {
-
+	
+	int[] base = {1,1,1,2,2,2,3,3,3,4,4,4};
+	boolean[] possible = new boolean[9];
+	Pion[] joueur1 = new Pion[12];
+	Pion[] joueur2 = new Pion[12];
 	Case[][] grille = new Case[8][7];
 	int decalage;
 	int tailleCase;
@@ -24,7 +28,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 	}
 
 	public Group dessinEnvironnement() {
-		Pion pion = null;
+		
 		// dessin des lignes
 		for (int i = 0; i < grille.length; i++) {
 			for (int j = 0; j < grille[i].length; j++) {
@@ -35,6 +39,11 @@ public class Plateau implements EventHandler<MouseEvent> {
 
 			}
 		}
+		
+		initPion(troupe);
+		
+		/*
+		Pion pion = null; 
 		int rand = 1;
 		for (int i = 0; i < 8; i++) {
 			for(int j = 0; j< 2; j++){
@@ -42,14 +51,47 @@ public class Plateau implements EventHandler<MouseEvent> {
 			int rand2 = (int) (Math.random() * 2);
 			pion = new Pion(decalage + tailleCase * i + tailleCase / 2,
 					decalage + decalageTrait + tailleCase * j*6 + tailleCase / 2, tailleCase/2, rand, rand2, i, j*6);
-			ajoutPion(pion, i, j*6, false, troupe);
+			ajoutPion(pion, troupe);
 			}
-		}
+		}*/
 		return troupe;
 
 	}
+	
+	public void initPion(Group troupe){
+		Pion pion = null;
+		Pion[] J = new Pion[12];
+		int rand;
+		for(int j = 0; j<2;j++){
+			for(int l = 1; l<9;l++)
+				possible[l] = false;
+			for(int k = 0; k < 4; k++){
+				for(int i = 0; i< 3;i++){
+					rand = (int) (Math.random() * 7)+1;
+					if(k == 1 || k == 3){
+						pion = new Pion(decalage + tailleCase * J[3*k+i-3].getLigne() + tailleCase / 2,
+								decalage + decalageTrait + tailleCase * j*6 + tailleCase / 2, tailleCase/2, base[3*k + i], j, J[3*k+i-3].getLigne(), j*6);
+						J[3*k+i-3].setFils(pion);
+					}else{
+						while(possible[rand]){
+							rand = (int) (Math.random() * 7)+1;
+							
+						}
+						pion = new Pion(decalage + tailleCase * rand + tailleCase / 2,
+						decalage + decalageTrait + tailleCase * j*6 + tailleCase / 2, tailleCase/2, base[3*k + i], j, rand, j*6);
+						grille[rand][j*6].placePion(pion);
+						possible[rand]=true;
+					}
+					J[3*k+i] = pion;
+					pion.setOnMouseClicked(this);
+					troupe.getChildren().add(pion);
+				}
+			}
+			
+		}
+	}
 
-	void ajoutPion(Pion pion, int i, int j, boolean horizontal, Group troupe) {
+	public void ajoutPion(Pion pion, Group troupe) {
 		pion.setOnMouseClicked(this);
 		grille[pion.getLigne()][pion.getCol()].placePion(pion);
 		troupe.getChildren().add(pion);
@@ -61,7 +103,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 		if (o instanceof Pion) {
 			Pion d = (Pion) o;
 
-			System.out.println("clic en " + d.getLigne() + "," + d.getCol());
+//			System.out.println("clic en " + d.getLigne() + "," + d.getCol());
 			// si on selectionne un nouveau pion ou deselectionne le pion deja selectionne
 			if (pionSelectionne == null || pionSelectionne == d) {
 				d.switchSelected();
@@ -70,6 +112,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 					pionSelectionne = d;
 					int x = pionSelectionne.getLigne();
 					int y = pionSelectionne.getCol();
+					System.out.println(x+"   "+y);
 					for (int i = 0; i < grille.length; i++) {
 						for (int j = 0; j < grille[i].length; j++) {
 							if (grille[i][j].getLigne() == x + 1 && grille[i][j].getCol() == y + 1) {
@@ -134,11 +177,14 @@ public class Plateau implements EventHandler<MouseEvent> {
 			}
 		} else if (o instanceof Case && pionSelectionne != null) {
 			Case r = (Case) o;
+			boolean suppr = false;
 			if (r.getEtat() == Etat.possible) {
 				int x = pionSelectionne.getLigne();
 				int y = pionSelectionne.getCol();
-				if(r.Contenu()!=null)
+				if(r.Contenu()!=null){
+				grille[x][y].placePion(pionSelectionne.getFils());
 				pionSelectionne.setFils(r.Contenu());
+				} else suppr = true;
 				//System.out.println(r.Contenu());
 				// le nouveau centre du jeton sera au centre du rectangle sélectionné
 				double newX = r.getX() + tailleCase / 2;
@@ -156,7 +202,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 				pionSelectionne.setCol(r.getCol());
 				for (int i = 0; i < grille.length; i++) {
 					for (int j = 0; j < grille[i].length; j++) {
-						if (grille[i][j].getLigne() == x && grille[i][j].getCol() == y) {
+						if (grille[i][j].getLigne() == x && grille[i][j].getCol() == y && suppr) {
 							grille[i][j].supprPion();
 						}
 						if (grille[i][j].getLigne() == pionSelectionne.getLigne()
@@ -170,6 +216,11 @@ public class Plateau implements EventHandler<MouseEvent> {
 				pionSelectionne = null;
 			}
 		}
+		
+		else if (o instanceof Case ) {
+		System.out.println(((Case) o).Contenu());
+		}
+		
 	}
 
 }
