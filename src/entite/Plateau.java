@@ -1,13 +1,8 @@
-package Entite;
+package entite;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 public class Plateau implements EventHandler<MouseEvent> {
 	
@@ -21,6 +16,9 @@ public class Plateau implements EventHandler<MouseEvent> {
 	int decalageTrait;
 	Pion pionSelectionne;
 	Group troupe = new Group();
+	int point1 = 0;
+	int point2 = 0;
+	Score score = new Score();
 
 	public Plateau(int decalage, int tailleCase, int decalageTrait) {
 		this.decalage = decalage;
@@ -95,6 +93,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 			ajoutPion(pion, troupe);
 			}
 		}*/
+		troupe.getChildren().add(score);
 		return troupe;
 
 	}
@@ -139,6 +138,20 @@ public class Plateau implements EventHandler<MouseEvent> {
 		troupe.getChildren().add(pion);
 	}
 
+	public void majPoint(Pion p) {
+		if(p.joueur == 0) {
+			if(p.getCol() == grille[0].length-1) {
+				point1 += p.getPoint();
+			}
+		}
+		else if(p.joueur == 1) {
+			if(p.getCol() == 0) {
+				point2 += p.getPoint();
+			}
+		}
+		score.setScore(point1, point2);
+	}
+	
 	public void handle(MouseEvent me) {
 
 		Object o = me.getSource();
@@ -249,6 +262,8 @@ public class Plateau implements EventHandler<MouseEvent> {
 						grille[i][j].resetColor();
 					}
 				}
+				
+				majPoint(pionSelectionne);
 
 				pionSelectionne = null;
 			}

@@ -7,7 +7,7 @@
  * @author Romain Thuillez
  */
 
-package Entite;
+package entite;
 
 public class Joueur {
 	private Etat couleur;

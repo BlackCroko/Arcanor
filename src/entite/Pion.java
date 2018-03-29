@@ -1,4 +1,4 @@
-package Entite;
+package entite;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -35,7 +35,7 @@ public class Pion extends Circle{
 	   /* this.setFill(Couleur.getCouleur());
 	    this.setStroke(stroke.getCouleur());*/
 		this.taille = taille;
-		this.point = 5-taille;
+		this.point = taille;
 	    joueur = _joueur;
 	    selected = false;
 	    getColorPion();

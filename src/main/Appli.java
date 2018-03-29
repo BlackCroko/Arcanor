@@ -1,8 +1,8 @@
 package main;
 
-import Entite.Etat;
-import Entite.Joueur;
-import Entite.Plateau;
+import entite.Etat;
+import entite.Joueur;
+import entite.Plateau;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;

@@ -4,7 +4,7 @@
  * @author Romain Thuillez
  */
 
-package Entite;
+package entite;
 
 import javafx.scene.shape.Rectangle;
 
