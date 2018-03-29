@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class Plateau implements EventHandler<MouseEvent> {
@@ -42,6 +43,46 @@ public class Plateau implements EventHandler<MouseEvent> {
 		
 		initPion(troupe);
 		
+		Choix C1 = new Choix(0, tailleCase);
+		Choix C2 = new Choix(1, tailleCase);
+		troupe.getChildren().add(C1);
+		troupe.getChildren().add(C2);
+//		C1.setOnMouseMoved(new EventHandler<MouseEvent>(){
+//			public void handle(MouseEvent me){
+//				C1.setFill(Color.AQUA);
+//			}
+//		});
+//		C1.setOnMouseExited(new EventHandler<MouseEvent>(){
+//			public void handle(MouseEvent me){
+//				C1.setFill(Color.GREY);
+//			}
+//		});
+		C1.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent me){
+				if(!C1.isSelected()){
+					C2.switchColor();
+					C1.switchColor();
+				}
+			}
+		});
+//		C2.setOnMouseMoved(new EventHandler<MouseEvent>(){
+//			public void handle(MouseEvent me){
+//				C2.setFill(Color.AQUA);
+//			}
+//		});
+//		C2.setOnMouseExited(new EventHandler<MouseEvent>(){
+//			public void handle(MouseEvent me){
+//				C2.setFill(Color.GREY);
+//			}
+//		});
+		C2.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			public void handle(MouseEvent me){
+				if(!C2.isSelected()){
+					C2.switchColor();
+					C1.switchColor();
+				}
+			}
+		});
 		/*
 		Pion pion = null; 
 		int rand = 1;
@@ -72,6 +113,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 						pion = new Pion(decalage + tailleCase * J[3*k+i-3].getLigne() + tailleCase / 2,
 								decalage + decalageTrait + tailleCase * j*6 + tailleCase / 2, tailleCase/2, base[3*k + i], j, J[3*k+i-3].getLigne(), j*6);
 						J[3*k+i-3].setFils(pion);
+						pion.setVisible(false);
 					}else{
 						while(possible[rand]){
 							rand = (int) (Math.random() * 7)+1;
@@ -189,15 +231,10 @@ public class Plateau implements EventHandler<MouseEvent> {
 				// le nouveau centre du jeton sera au centre du rectangle sélectionné
 				double newX = r.getX() + tailleCase / 2;
 				double newY = r.getY() + tailleCase / 2;
-				int tps = 300;
 				pionSelectionne.switchSelected();
+				
 				pionSelectionne.deplacement(r.getLigne(), r.getCol(), newX, newY);
-				/*Timeline timeline = new Timeline();
-				timeline.getKeyFrames()
-						.addAll(new KeyFrame(new Duration(tps), new KeyValue(pionSelectionne.centerXProperty(), newX),
-								new KeyValue(pionSelectionne.centerYProperty(), newY),
-								new KeyValue(pionSelectionne.fillProperty(), pionSelectionne.getCj())));
-				timeline.play();*/
+				
 				pionSelectionne.setLigne(r.getLigne());
 				pionSelectionne.setCol(r.getCol());
 				for (int i = 0; i < grille.length; i++) {
