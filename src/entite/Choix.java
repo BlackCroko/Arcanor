@@ -5,10 +5,10 @@ import javafx.scene.shape.Rectangle;
 
 public class Choix extends Rectangle{
 	
-	int id;
-	Color Libre = Color.GREY;
-	Color select = Color.DARKGOLDENROD;
-	boolean selected = false;
+	private int id;
+	private Color Libre = Color.GREY;
+	private Color select = Color.DARKGOLDENROD;
+	private boolean selected = false;
 
 	public Choix(int id, int tailleCase) {
 		super(100, tailleCase*8, 150, 50);

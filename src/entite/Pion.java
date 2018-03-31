@@ -29,6 +29,8 @@ public class Pion extends Circle{
 	private int point;
 	
 	private Pion fils = null;
+	
+	private boolean Fin = false;
 
 	public Pion(double startX, double startY, double taillebase, int taille, int _joueur, int ligne, int col) {
 		super(startX, startY, taillebase/taille);
@@ -48,10 +50,11 @@ public class Pion extends Circle{
 		int tps = 300;
 		Timeline timeline = new Timeline();
 		if(fils != null){
-		timeline.getKeyFrames()
-				.addAll(new KeyFrame(new Duration(tps), new KeyValue(fils.centerXProperty(), x),
-						new KeyValue(fils.centerYProperty(), y),
-						new KeyValue(fils.fillProperty(), fils.getCj())));
+//		timeline.getKeyFrames()
+//				.addAll(new KeyFrame(new Duration(tps), new KeyValue(fils.centerXProperty(), x),
+//						new KeyValue(fils.centerYProperty(), y),
+//						new KeyValue(fils.fillProperty(), fils.getCj())));
+			fils.deplacement(i, j, x, y);
 		}
 		timeline.getKeyFrames()
 		.addAll(new KeyFrame(new Duration(tps), new KeyValue(this.centerXProperty(), x),
@@ -124,6 +127,14 @@ public class Pion extends Circle{
 
 	public int getJoueur() {
 		return joueur;
+	}
+
+	public boolean isFin() {
+		return Fin;
+	}
+
+	public void setFin(boolean fin) {
+		Fin = fin;
 	}
 
 	  
