@@ -23,12 +23,12 @@ public class Choix extends ImageView{
 		if(id == 0){
 			selected = true;
 			this.setImage(img1S);
-			this.setX(100);
+			this.setX(75);
 			this.setY(tailleCase*8);
 		}
 		else{
 			this.setImage(img2);
-			this.setX(tailleCase*6);
+			this.setX(tailleCase*6-tailleCase/2);
 			this.setY(tailleCase*8);
 		}
 	}
