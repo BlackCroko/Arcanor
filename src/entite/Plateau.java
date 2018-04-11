@@ -33,6 +33,8 @@ public class Plateau implements EventHandler<MouseEvent> {
 	Score score = new Score();
 	Choix C1;
 	Choix C2;
+	
+	int joueurActuel = 0;
 
 	public Plateau(int decalage, int tailleCase, int decalageTrait) {
 		this.decalage = decalage;
@@ -179,7 +181,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 
 //			System.out.println("clic en " + d.getLigne() + "," + d.getCol());
 			// si on selectionne un nouveau pion ou deselectionne le pion deja selectionne
-			if ((pionSelectionne == null || pionSelectionne == d) && !d.isFin()) {
+			if ((pionSelectionne == null || pionSelectionne == d) && !d.isFin() && d.getJoueur() == joueurActuel) {
 				d.switchSelected();
 				d.colorPion();
 				if (pionSelectionne == null) {
@@ -291,9 +293,16 @@ public class Plateau implements EventHandler<MouseEvent> {
 				majPoint(pionSelectionne);
 				//Victoire(troupe);
 				pionSelectionne = null;
+				switchJoueur();
 			}
 		}
 		
+	}
+	
+	public void switchJoueur(){
+		if(joueurActuel == 0)
+			joueurActuel = 1;
+		else joueurActuel = 0;
 	}
 	
 	public void Victoire(Group troupe){

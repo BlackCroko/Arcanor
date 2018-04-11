@@ -1,5 +1,6 @@
 package main;
 
+import affichage.Menu;
 import entite.Etat;
 import entite.Joueur;
 import entite.Plateau;
@@ -41,11 +42,14 @@ public class Appli extends Application {
 	/** construction du théatre et de la scène */
 	void construirePlateauJeu(Stage primaryStage) {
 		// definir la scene principale
+		Menu menu = new Menu(decalage, tailleCase, decalageTrait);
 		Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait);
 		Group troupe = new Group();
-		troupe = plateau.dessinEnvironnement();
+		//troupe = plateau.dessinEnvironnement();
+		troupe = menu;
 		Scene scene = new Scene(troupe, tailleCase + (nbCol) * tailleCase, tailleCase + (nbLigne+1) * tailleCase,
 				Color.ANTIQUEWHITE);
+		scene.getStylesheets().add(getClass().getClassLoader().getResource("login.css").toExternalForm());
 		primaryStage.setTitle("Arcanor");
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
