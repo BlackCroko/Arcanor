@@ -291,7 +291,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 				}
 				
 				majPoint(pionSelectionne);
-				//Victoire(troupe);
+				Victoire(troupe);
 				pionSelectionne = null;
 				switchJoueur();
 			}
@@ -303,10 +303,13 @@ public class Plateau implements EventHandler<MouseEvent> {
 		if(joueurActuel == 0)
 			joueurActuel = 1;
 		else joueurActuel = 0;
+		score.switchTrait(joueurActuel);
 	}
 	
 	public void Victoire(Group troupe){
-        for (int i = 0; i < 30; i++) {
+       
+		if((point1 >=12) || (point2 >=12)){
+		for (int i = 0; i < 30; i++) {
             Circle circle = new Circle(150, Color.web("white", 0.05));
             circle.setStrokeType(StrokeType.OUTSIDE);
             circle.setStroke(Color.web("white", 0.06));
@@ -345,5 +348,5 @@ public class Plateau implements EventHandler<MouseEvent> {
        // timeline.setOnFinished(timeline.play());
 
 	}
-
+	}
 }
