@@ -7,8 +7,8 @@ public class IA {
 	ArrayList<Grille> fils = new ArrayList<Grille>();
 	Grille G = new Grille();
 
-	public IA(Case[][] grille) {
-		G.setGrille(grille);
+	public IA(Grille grille) {
+		G = grille;
 	}
 
 	public void solve() {
