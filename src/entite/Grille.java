@@ -4,8 +4,7 @@ public class Grille {
 
 	Case[][] grille = new Case[8][7];
 
-	public Grille(Case[][] grille) {
-		this.grille = grille;
+	public Grille() {
 	}
 
 	public Case[][] getGrille() {
