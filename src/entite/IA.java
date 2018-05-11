@@ -1,9 +1,12 @@
 package entite;
 
+import java.util.ArrayList;
+
 public class IA {
 	
 
 	Case[][] grille = new Case[8][7];
+	ArrayList<Grille> fils = new ArrayList<Grille>();
 	
 	public IA(Case[][] grille){
 		this.grille = grille;
