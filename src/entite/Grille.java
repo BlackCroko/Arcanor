@@ -16,8 +16,8 @@ public class Grille {
 		this.grille = grille;
 	}
 	
-	public Case[][] deplacement(int x1, int y1, int x2, int y2){
-		return grille;
+	public Grille deplacement(int x1, int y1, int x2, int y2){
+		return this;
 	}
 
 }
