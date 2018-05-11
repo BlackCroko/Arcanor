@@ -11,7 +11,6 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.util.Duration;
 
@@ -21,7 +20,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 	boolean[] possible = new boolean[9];
 	Pion[] joueur1 = new Pion[12];
 	Pion[] joueur2 = new Pion[12];
-	Case[][] grille = new Case[8][7];
+	Grille grille = new Grille();
 	int decalage;
 	int tailleCase;
 	int decalageTrait;
@@ -47,12 +46,12 @@ public class Plateau implements EventHandler<MouseEvent> {
 	public Group dessinEnvironnement() {
 
 		// dessin des lignes
-		for (int i = 0; i < grille.length; i++) {
-			for (int j = 0; j < grille[i].length; j++) {
-				grille[i][j] = new Case(decalage + tailleCase * i, decalage + decalageTrait + tailleCase * j,
+		for (int i = 0; i < grille.getGrille().length; i++) {
+			for (int j = 0; j < grille.getGrille()[i].length; j++) {
+				grille.getGrille()[i][j] = new Case(decalage + tailleCase * i, decalage + decalageTrait + tailleCase * j,
 						tailleCase, tailleCase, i, j);
-				troupe.getChildren().add(grille[i][j]);
-				grille[i][j].setOnMouseClicked(this);
+				troupe.getChildren().add(grille.getGrille()[i][j]);
+				grille.getGrille()[i][j].setOnMouseClicked(this);
 
 			}
 		}
@@ -136,7 +135,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 						pion = new Pion(decalage + tailleCase * rand + tailleCase / 2,
 								decalage + decalageTrait + tailleCase * j * 6 + tailleCase / 2, tailleCase / 2,
 								base[3 * k + i], j, rand, j * 6);
-						grille[rand][j * 6].placePion(pion);
+						grille.getGrille()[rand][j * 6].placePion(pion);
 						possible[rand] = true;
 					}
 					J[3 * k + i] = pion;
@@ -150,13 +149,13 @@ public class Plateau implements EventHandler<MouseEvent> {
 
 	public void ajoutPion(Pion pion, Group troupe) {
 		pion.setOnMouseClicked(this);
-		grille[pion.getLigne()][pion.getCol()].placePion(pion);
+		grille.getGrille()[pion.getLigne()][pion.getCol()].placePion(pion);
 		troupe.getChildren().add(pion);
 	}
 
 	public void majPoint(Pion p) {
 		if (p.joueur == 0) {
-			if (p.getCol() == grille[0].length - 1) {
+			if (p.getCol() == grille.getGrille()[0].length - 1) {
 				point1 += p.getPoint();
 				p.setFin(true);
 				// Victoire(troupe);
@@ -187,64 +186,64 @@ public class Plateau implements EventHandler<MouseEvent> {
 					pionSelectionne = d;
 					int x = pionSelectionne.getLigne();
 					int y = pionSelectionne.getCol();
-					for (int i = 0; i < grille.length; i++) {
-						for (int j = 0; j < grille[i].length; j++) {
-							if (grille[i][j].getLigne() == x + 1 && grille[i][j].getCol() == y + 1) {
-								if (grille[i][j].isJouable(pionSelectionne))
-									grille[i][j].ispossible();
+					for (int i = 0; i < grille.getGrille().length; i++) {
+						for (int j = 0; j < grille.getGrille()[i].length; j++) {
+							if (grille.getGrille()[i][j].getLigne() == x + 1 && grille.getGrille()[i][j].getCol() == y + 1) {
+								if (grille.getGrille()[i][j].isJouable(pionSelectionne))
+									grille.getGrille()[i][j].ispossible();
 								else
-									grille[i][j].isimpossible();
+									grille.getGrille()[i][j].isimpossible();
 							}
-							if (grille[i][j].getLigne() == x && grille[i][j].getCol() == y + 1) {
-								if (grille[i][j].isJouable(pionSelectionne))
-									grille[i][j].ispossible();
+							if (grille.getGrille()[i][j].getLigne() == x && grille.getGrille()[i][j].getCol() == y + 1) {
+								if (grille.getGrille()[i][j].isJouable(pionSelectionne))
+									grille.getGrille()[i][j].ispossible();
 								else
-									grille[i][j].isimpossible();
+									grille.getGrille()[i][j].isimpossible();
 							}
-							if (grille[i][j].getLigne() == x - 1 && grille[i][j].getCol() == y + 1) {
-								if (grille[i][j].isJouable(pionSelectionne))
-									grille[i][j].ispossible();
+							if (grille.getGrille()[i][j].getLigne() == x - 1 && grille.getGrille()[i][j].getCol() == y + 1) {
+								if (grille.getGrille()[i][j].isJouable(pionSelectionne))
+									grille.getGrille()[i][j].ispossible();
 								else
-									grille[i][j].isimpossible();
+									grille.getGrille()[i][j].isimpossible();
 							}
-							if (grille[i][j].getLigne() == x + 1 && grille[i][j].getCol() == y) {
-								if (grille[i][j].isJouable(pionSelectionne))
-									grille[i][j].ispossible();
+							if (grille.getGrille()[i][j].getLigne() == x + 1 && grille.getGrille()[i][j].getCol() == y) {
+								if (grille.getGrille()[i][j].isJouable(pionSelectionne))
+									grille.getGrille()[i][j].ispossible();
 								else
-									grille[i][j].isimpossible();
+									grille.getGrille()[i][j].isimpossible();
 							}
-							if (grille[i][j].getLigne() == x + 1 && grille[i][j].getCol() == y - 1) {
-								if (grille[i][j].isJouable(pionSelectionne))
-									grille[i][j].ispossible();
+							if (grille.getGrille()[i][j].getLigne() == x + 1 && grille.getGrille()[i][j].getCol() == y - 1) {
+								if (grille.getGrille()[i][j].isJouable(pionSelectionne))
+									grille.getGrille()[i][j].ispossible();
 								else
-									grille[i][j].isimpossible();
+									grille.getGrille()[i][j].isimpossible();
 
 							}
-							if (grille[i][j].getLigne() == x && grille[i][j].getCol() == y - 1) {
-								if (grille[i][j].isJouable(pionSelectionne))
-									grille[i][j].ispossible();
+							if (grille.getGrille()[i][j].getLigne() == x && grille.getGrille()[i][j].getCol() == y - 1) {
+								if (grille.getGrille()[i][j].isJouable(pionSelectionne))
+									grille.getGrille()[i][j].ispossible();
 								else
-									grille[i][j].isimpossible();
+									grille.getGrille()[i][j].isimpossible();
 							}
-							if (grille[i][j].getLigne() == x - 1 && grille[i][j].getCol() == y - 1) {
-								if (grille[i][j].isJouable(pionSelectionne))
-									grille[i][j].ispossible();
+							if (grille.getGrille()[i][j].getLigne() == x - 1 && grille.getGrille()[i][j].getCol() == y - 1) {
+								if (grille.getGrille()[i][j].isJouable(pionSelectionne))
+									grille.getGrille()[i][j].ispossible();
 								else
-									grille[i][j].isimpossible();
+									grille.getGrille()[i][j].isimpossible();
 							}
-							if (grille[i][j].getLigne() == x - 1 && grille[i][j].getCol() == y) {
-								if (grille[i][j].isJouable(pionSelectionne))
-									grille[i][j].ispossible();
+							if (grille.getGrille()[i][j].getLigne() == x - 1 && grille.getGrille()[i][j].getCol() == y) {
+								if (grille.getGrille()[i][j].isJouable(pionSelectionne))
+									grille.getGrille()[i][j].ispossible();
 								else
-									grille[i][j].isimpossible();
+									grille.getGrille()[i][j].isimpossible();
 							}
 						}
 					}
 				} else {
 					pionSelectionne = null;
-					for (int i = 0; i < grille.length; i++) {
-						for (int j = 0; j < grille[i].length; j++) {
-							grille[i][j].resetColor();
+					for (int i = 0; i < grille.getGrille().length; i++) {
+						for (int j = 0; j < grille.getGrille()[i].length; j++) {
+							grille.getGrille()[i][j].resetColor();
 						}
 					}
 				}
@@ -256,7 +255,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 				int x = pionSelectionne.getLigne();
 				int y = pionSelectionne.getCol();
 				if (r.Contenu() != null || C2.isSelected()) {
-					grille[x][y].placePion(pionSelectionne.getFils());
+					grille.getGrille()[x][y].placePion(pionSelectionne.getFils());
 					if (pionSelectionne.getFils() != null) {
 						pionSelectionne.getFils().setVisible(true);
 						pionSelectionne.getFils().setLigne(x);
@@ -278,16 +277,16 @@ public class Plateau implements EventHandler<MouseEvent> {
 
 				pionSelectionne.setLigne(r.getLigne());
 				pionSelectionne.setCol(r.getCol());
-				for (int i = 0; i < grille.length; i++) {
-					for (int j = 0; j < grille[i].length; j++) {
-						if (grille[i][j].getLigne() == x && grille[i][j].getCol() == y && suppr) {
-							grille[i][j].supprPion();
+				for (int i = 0; i < grille.getGrille().length; i++) {
+					for (int j = 0; j < grille.getGrille()[i].length; j++) {
+						if (grille.getGrille()[i][j].getLigne() == x && grille.getGrille()[i][j].getCol() == y && suppr) {
+							grille.getGrille()[i][j].supprPion();
 						}
-						if (grille[i][j].getLigne() == pionSelectionne.getLigne()
-								&& grille[i][j].getCol() == pionSelectionne.getCol()) {
-							grille[i][j].placePion(pionSelectionne);
+						if (grille.getGrille()[i][j].getLigne() == pionSelectionne.getLigne()
+								&& grille.getGrille()[i][j].getCol() == pionSelectionne.getCol()) {
+							grille.getGrille()[i][j].placePion(pionSelectionne);
 						}
-						grille[i][j].resetColor();
+						grille.getGrille()[i][j].resetColor();
 					}
 				}
 
