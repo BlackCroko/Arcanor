@@ -27,8 +27,6 @@ public class Plateau implements EventHandler<MouseEvent> {
 	Pion pionSelectionne;
 	Group total = new Group();
 	Group troupe = new Group();
-	int point1 = 0;
-	int point2 = 0;
 	Score score = new Score();
 	Choix C1;
 	Choix C2;
@@ -62,16 +60,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 		C2 = new Choix(1, tailleCase);
 		troupe.getChildren().add(C1);
 		troupe.getChildren().add(C2);
-		// C1.setOnMouseMoved(new EventHandler<MouseEvent>(){
-		// public void handle(MouseEvent me){
-		// C1.setFill(Color.AQUA);
-		// }
-		// });
-		// C1.setOnMouseExited(new EventHandler<MouseEvent>(){
-		// public void handle(MouseEvent me){
-		// C1.setFill(Color.GREY);
-		// }
-		// });
+		
 		C1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
 				if (!C1.isSelected()) {
@@ -80,16 +69,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 				}
 			}
 		});
-		// C2.setOnMouseMoved(new EventHandler<MouseEvent>(){
-		// public void handle(MouseEvent me){
-		// C2.setFill(Color.AQUA);
-		// }
-		// });
-		// C2.setOnMouseExited(new EventHandler<MouseEvent>(){
-		// public void handle(MouseEvent me){
-		// C2.setFill(Color.GREY);
-		// }
-		// });
+		
 		C2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
 				if (!C2.isSelected()) {
@@ -98,13 +78,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 				}
 			}
 		});
-		/*
-		 * Pion pion = null; int rand = 1; for (int i = 0; i < 8; i++) { for(int j = 0;
-		 * j< 2; j++){ rand =4 - i % 4; int rand2 = (int) (Math.random() * 2); pion =
-		 * new Pion(decalage + tailleCase * i + tailleCase / 2, decalage + decalageTrait
-		 * + tailleCase * j*6 + tailleCase / 2, tailleCase/2, rand, rand2, i, j*6);
-		 * ajoutPion(pion, troupe); } }
-		 */
+		
 		troupe.getChildren().add(score);
 		total.getChildren().add(troupe);
 		return total;
@@ -151,23 +125,6 @@ public class Plateau implements EventHandler<MouseEvent> {
 		pion.setOnMouseClicked(this);
 		grille.getGrille()[pion.getLigne()][pion.getCol()].placePion(pion);
 		troupe.getChildren().add(pion);
-	}
-
-	public void majPoint(Pion p) {
-		if (p.joueur == 0) {
-			if (p.getCol() == grille.getGrille()[0].length - 1) {
-				point1 += p.getPoint();
-				p.setFin(true);
-				// Victoire(troupe);
-			}
-		} else if (p.joueur == 1) {
-			if (p.getCol() == 0) {
-				point2 += p.getPoint();
-				p.setFin(true);
-				// Victoire(troupe);
-			}
-		}
-		score.setScore(point1, point2);
 	}
 
 	public void handle(MouseEvent me) {
@@ -299,7 +256,8 @@ public class Plateau implements EventHandler<MouseEvent> {
 					}
 				}
 
-				majPoint(pionSelectionne);
+				grille.majPoint();
+				score.setScore(grille.getPointj1(), grille.getPointj2());
 				Victoire(troupe);
 				pionSelectionne = null;
 				switchJoueur();
@@ -323,7 +281,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 
 	public void Victoire(Group troupe) {
 
-		if ((point1 >= 12) || (point2 >= 12)) {
+		if ((grille.getPointj1() >= 12) || (grille.getPointj2() >= 12)) {
 			for (int i = 0; i < 30; i++) {
 				Circle circle = new Circle(150, Color.web("white", 0.05));
 				circle.setStrokeType(StrokeType.OUTSIDE);
