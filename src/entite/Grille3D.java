@@ -64,6 +64,10 @@ public class Grille3D {
 		}
 	}
 
+	public int[][][] getGrille() {
+		return grille;
+	}
+
 	public boolean isJouable(int x1, int y1, int x2, int y2, int Joueur) {
 		if (grille[x2][y2][0] == 0 || (Joueur == 0 && grille[x2][y2][0] - 4 == grille[x1][y1][0] + 1)
 				|| (Joueur == 1 && grille[x2][y2][0] + 1 == grille[x1][y1][0] - 4))
