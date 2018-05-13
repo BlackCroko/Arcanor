@@ -28,9 +28,9 @@ public class Grille3D {
 	public void affichage() {
 		for (int i = 0; i < grille.length; i++) {
 			for (int j = 0; j < grille[i].length; j++) {
-				for(int k = 0; k < grille[i][j].length; k++){
+				for (int k = 0; k < grille[i][j].length; k++) {
 					if (grille[i][j][k] != 0) {
-						System.out.print(grille[i][j][k]);	
+						System.out.print(grille[i][j][k]);
 					}
 				}
 			}
@@ -63,10 +63,13 @@ public class Grille3D {
 			grille[x][y][i] = grille[x][y][i - 1];
 		}
 	}
-	
-	public boolean isJouable(int x1, int y1, int x2, int y2){
-		
-		return true;
+
+	public boolean isJouable(int x1, int y1, int x2, int y2, int Joueur) {
+		if (grille[x2][y2][0] == 0 || (Joueur == 0 && grille[x2][y2][0] - 4 == grille[x1][y1][0] + 1)
+				|| (Joueur == 1 && grille[x2][y2][0] + 1 == grille[x1][y1][0] - 4))
+			return true;
+		else
+			return false;
 	}
 
 }
