@@ -215,46 +215,20 @@ public class Plateau implements EventHandler<MouseEvent> {
 			}
 		} else if (o instanceof Case && pionSelectionne != null) {
 			Case r = (Case) o;
-			boolean suppr = false;
 			if (r.getEtat() == Etat.possible) {
 				int x = pionSelectionne.getLigne();
-				int y = pionSelectionne.getCol();
-				if (r.Contenu() != null || C2.isSelected()) {
-					grille.getGrille()[x][y].placePion(pionSelectionne.getFils());
-					if (pionSelectionne.getFils() != null) {
-						pionSelectionne.getFils().setVisible(true);
-						pionSelectionne.getFils().setLigne(x);
-						pionSelectionne.getFils().setCol(y);
-					}
-					pionSelectionne.setFils(r.Contenu());
-					if (r.Contenu() != null)
-						r.Contenu().setVisible(false);
-				} else
-					suppr = true;
-				// System.out.println(r.Contenu());
-				// le nouveau centre du jeton sera au centre du rectangle
-				// sélectionné
-				double newX = r.getX() + tailleCase / 2;
-				double newY = r.getY() + tailleCase / 2;
+				int y = pionSelectionne.getCol();	
+				
 				pionSelectionne.switchSelected();
 
-				pionSelectionne.deplacement(r.getLigne(), r.getCol(), newX, newY);
+				if (r.Contenu() != null || C2.isSelected()) {
+					grille = grille.deplacement(x, y, r.getLigne(), r.getCol(), true);
+				} else
+					grille = grille.deplacement(x, y, r.getLigne(), r.getCol(), false);
+				
 
-				pionSelectionne.setLigne(r.getLigne());
-				pionSelectionne.setCol(r.getCol());
-				for (int i = 0; i < grille.getGrille().length; i++) {
-					for (int j = 0; j < grille.getGrille()[i].length; j++) {
-						if (grille.getGrille()[i][j].getLigne() == x && grille.getGrille()[i][j].getCol() == y
-								&& suppr) {
-							grille.getGrille()[i][j].supprPion();
-						}
-						if (grille.getGrille()[i][j].getLigne() == pionSelectionne.getLigne()
-								&& grille.getGrille()[i][j].getCol() == pionSelectionne.getCol()) {
-							grille.getGrille()[i][j].placePion(pionSelectionne);
-						}
-						grille.getGrille()[i][j].resetColor();
-					}
-				}
+
+
 
 				grille.majPoint();
 				score.setScore(grille.getPointj1(), grille.getPointj2());
@@ -273,9 +247,9 @@ public class Plateau implements EventHandler<MouseEvent> {
 			joueurActuel = 0;
 		score.switchTrait(joueurActuel);
 
+		ordi = new IA(grille);
 		if (joueurActuel == 1) {
-			ordi = new IA(grille);
-			ordi.solve();
+		//	ordi.solve();
 		}
 	}
 

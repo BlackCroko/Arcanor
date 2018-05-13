@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class Pion extends Circle{
+public class Pion extends Circle implements Cloneable{
 	
 	boolean selected;
 	/**numero du joueur associe*/
@@ -34,8 +34,6 @@ public class Pion extends Circle{
 
 	public Pion(double startX, double startY, double taillebase, int taille, int _joueur, int ligne, int col) {
 		super(startX, startY, taillebase/taille);
-	   /* this.setFill(Couleur.getCouleur());
-	    this.setStroke(stroke.getCouleur());*/
 		this.taille = taille;
 		this.point = taille;
 	    joueur = _joueur;
@@ -46,15 +44,14 @@ public class Pion extends Circle{
 	    this.col = col;
 	  }
 	
-	public void deplacement(int i, int j, double x, double y){
+	public void deplacement(double x, double y, boolean extraire){
+		
+		
+		
 		int tps = 300;
 		Timeline timeline = new Timeline();
 		if(fils != null){
-//		timeline.getKeyFrames()
-//				.addAll(new KeyFrame(new Duration(tps), new KeyValue(fils.centerXProperty(), x),
-//						new KeyValue(fils.centerYProperty(), y),
-//						new KeyValue(fils.fillProperty(), fils.getCj())));
-			fils.deplacement(i, j, x, y);
+			fils.deplacement(x, y, extraire);
 		}
 		timeline.getKeyFrames()
 		.addAll(new KeyFrame(new Duration(tps), new KeyValue(this.centerXProperty(), x),
@@ -137,5 +134,8 @@ public class Pion extends Circle{
 		Fin = fin;
 	}
 
-	  
+    public Pion clone() throws CloneNotSupportedException {   
+    	return (Pion)super.clone();
+    } 
+	
 }
