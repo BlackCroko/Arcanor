@@ -21,6 +21,8 @@ public class Grille3D {
 			}
 		}
 		affichage();
+		deplacement(0, 0, 0, 1, false);
+		affichage();
 	}
 
 	public void affichage() {
@@ -59,9 +61,12 @@ public class Grille3D {
 		System.out.println("");
 		for (int i = 3; i > 0; i--) {
 			grille[x][y][i] = grille[x][y][i - 1];
-			System.out.println(grille[x][y][i]);
 		}
-		System.out.println(grille[x][y][0]);
+	}
+	
+	public boolean isJouable(int x1, int y1, int x2, int y2){
+		
+		return true;
 	}
 
 }
