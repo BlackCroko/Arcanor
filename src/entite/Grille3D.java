@@ -23,21 +23,23 @@ public class Grille3D {
 			}
 			System.out.println("");
 		}
-		descente(0, 0);
+		deplacement(0, 0, 1, 1, true);
 	}
 	
 	public void deplacement(int x1, int y1, int x2, int y2, boolean extraire) {
-		if(extraire || grille[x2][y2][0] != 0){
+		Grille3D g = this;
+		if(extraire || g.getGrille3D()[x2][y2][0] != 0){
 			descente(x2, y2);
-			grille[x2][y2][0] = grille[x1][y1][0];
+			g.getGrille3D()[x2][y2][0] = g.getGrille3D()[x1][y1][0];
 			remonter(x1, y1);
 		}
 		else {
 			for(int i = 0; i < 4; i++){
-				grille[x2][y2][i] = grille[x1][y1][i];
-				grille[x1][y1][i] = 0;
+				g.getGrille3D()[x2][y2][i] = g.getGrille3D()[x1][y1][i];
+				g.getGrille3D()[x1][y1][i] = 0;
 			}
 		}
+		
 	}
 	
 	public void remonter(int x, int y){	
@@ -50,9 +52,11 @@ public class Grille3D {
 		System.out.println("");		
 		for(int i = 3; i > 0; i--){
 			grille[x][y][i] = grille[x][y][i-1];
-			System.out.println(grille[x][y][i]);
 		}
-		System.out.println(grille[x][y][0]);
+	}
+	
+	public int[][][] getGrille3D(){
+		return grille;
 	}
 	
 
