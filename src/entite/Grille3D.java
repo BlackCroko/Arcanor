@@ -27,18 +27,10 @@ public class Grille3D {
 		for (int i = 0; i < g.length; i++) {
 			for (int j = 0; j < g[i].length; j++) {
 				int k = 0;
-				if (g[i][j].Contenu() != null) {
-					Pion pion = g[i][j].Contenu();
-					System.out.print(grille[i][j][k]);
-					while (pion.getFils() != null) {
-						k++;
-						pion = pion.getFils();
-						System.out.print(grille[i][j][k]);
-					}
-				}
+				System.out.print(grille[i][j][k]);
 			}
-			System.out.println("");
 		}
+		System.out.println("");
 	}
 
 	public void deplacement(int x1, int y1, int x2, int y2, boolean extraire) {
