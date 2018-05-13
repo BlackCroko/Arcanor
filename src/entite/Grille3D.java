@@ -20,17 +20,20 @@ public class Grille3D {
 				}
 			}
 		}
+		affichage();
 	}
 
-	public void affichage(Grille G) {
-		Case[][] g = G.getGrille();
-		for (int i = 0; i < g.length; i++) {
-			for (int j = 0; j < g[i].length; j++) {
-				int k = 0;
-				System.out.print(grille[i][j][k]);
+	public void affichage() {
+		for (int i = 0; i < grille.length; i++) {
+			for (int j = 0; j < grille[i].length; j++) {
+				for(int k = 0; k < grille[i][j].length; k++){
+					if (grille[i][j][k] != 0) {
+						System.out.print(grille[i][j][k]);	
+					}
+				}
 			}
+			System.out.println("");
 		}
-		System.out.println("");
 	}
 
 	public void deplacement(int x1, int y1, int x2, int y2, boolean extraire) {
