@@ -222,9 +222,9 @@ public class Plateau implements EventHandler<MouseEvent> {
 				pionSelectionne.switchSelected();
 
 				if (r.Contenu() != null || C2.isSelected()) {
-					grille = grille.deplacement(x, y, r.getLigne(), r.getCol(), true);
+					grille.deplacement(x, y, r.getLigne(), r.getCol(), true);
 				} else
-					grille = grille.deplacement(x, y, r.getLigne(), r.getCol(), false);
+					grille.deplacement(x, y, r.getLigne(), r.getCol(), false);
 				
 
 

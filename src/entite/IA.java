@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class IA {
 
 	ArrayList<Grille> fils = new ArrayList<Grille>();
-	Grille G = new Grille();
+	Grille3D G;
 
 	public IA(Grille grille) {
-		G = grille;
+		G = new Grille3D(grille);
 	}
 
 	public void solve() {
@@ -20,20 +20,20 @@ public class IA {
 					if (G.getGrille()[k][l].Contenu().getJoueur() == 1) {
 						int x = G.getGrille()[k][l].Contenu().getLigne();
 						int y = G.getGrille()[k][l].Contenu().getCol();
-						System.out.println("    "+k+"    "+l);
-						System.out.println("    "+x+"    "+y);
 						for (int i = 0; i < G.getGrille().length; i++) {
 							for (int j = 0; j < G.getGrille()[i].length; j++) {
 
 								if (G.getGrille()[i][j].getLigne() == x + 1 && G.getGrille()[i][j].getCol() == y + 1) {
 									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu())){
-										fils.add(G.deplacement(x, y, x + 1, y + 1, false));
+									//	fils.add(G.deplacement(x, y, x + 1, y + 1, false));
 									System.out.println("test1");
 									}
 								}
 								if (G.getGrille()[i][j].getLigne() == x && G.getGrille()[i][j].getCol() == y + 1) {
-									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu()))
+									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu())){
 										fils.add(G.deplacement(x, y, x, y + 1, false));
+										System.out.println("je recule");
+									}
 								}
 								if (G.getGrille()[i][j].getLigne() == x - 1 && G.getGrille()[i][j].getCol() == y + 1) {
 									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu()))

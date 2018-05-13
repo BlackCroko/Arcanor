@@ -1,6 +1,6 @@
 package entite;
 
-public class Grille {
+public class Grille implements Cloneable{
 
 	Case[][] grille = new Case[8][7];
 
@@ -11,26 +11,7 @@ public class Grille {
 	}
 	
 	public Grille(Case[][] g){
-		for (int i = 0; i < g.length; i++) {
-			for (int j = 0; j < g[i].length; j++) {
-				Case temp = g[i][j];
-				grille[i][j] = new Case(temp.getX(), temp.getY(), temp.getWidth(), temp.getHeight(), temp.getLigne(), temp.getCol());
-				if(g[i][j].Contenu() != null){
-					Pion pion = temp.Contenu();
-					try {
-						grille[i][j].placePion(pion.clone());
-					} catch (CloneNotSupportedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					while(pion.getFils() != null){
-						
-					}
-				}
-				
-				
-			}
-		}
+		grille = g;
 	}
 
 	public Case[][] getGrille() {
@@ -41,12 +22,11 @@ public class Grille {
 		this.grille = grille;
 	}
 
-	public Grille deplacement(int x1, int y1, int x2, int y2, boolean extraire) {
-		Grille G = new Grille(grille);
-		Pion pion = G.getGrille()[x1][y1].Contenu();
-		Case dest = G.getGrille()[x2][y2];
+	public void deplacement(int x1, int y1, int x2, int y2, boolean extraire) {
+		Pion pion = grille[x1][y1].Contenu();
+		Case dest = grille[x2][y2];
 		if(extraire){
-			G.getGrille()[x1][y1].placePion(pion.getFils());
+			grille[x1][y1].placePion(pion.getFils());
 			if (pion.getFils() != null) {
 				pion.getFils().setVisible(true);
 				pion.getFils().setLigne(x1);
@@ -57,7 +37,7 @@ public class Grille {
 				dest.Contenu().setVisible(false);
 		}
 		
-		pion.deplacement(G.getGrille()[x2][y2].getX() + G.getGrille()[x2][y2].getWidth() / 2, G.getGrille()[x2][y2].getY() + G.getGrille()[x2][y2].getWidth() / 2, extraire);
+		pion.deplacement(grille[x2][y2].getX() + grille[x2][y2].getWidth() / 2, grille[x2][y2].getY() + grille[x2][y2].getWidth() / 2, extraire);
 		
 		pion.setLigne(x2);
 		pion.setCol(y2);
@@ -75,8 +55,6 @@ public class Grille {
 				grille[i][j].resetColor();
 			}
 		}
-		
-		return G;
 	}
 	
 	public void majPoint() {
@@ -119,6 +97,8 @@ public class Grille {
 		return pointj2;
 	}
 	
-	
+    public Grille clone() throws CloneNotSupportedException {   
+    	return (Grille)super.clone();
+    } 
 
 }
