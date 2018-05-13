@@ -1,6 +1,6 @@
 package entite;
 
-public class Grille3D {
+public class Grille3D implements Cloneable{
 
 	private int[][][] grille = new int[8][7][4];
 
@@ -103,5 +103,9 @@ public class Grille3D {
 		else
 			return false;
 	}
+	
+	public Grille3D clone() throws CloneNotSupportedException {
+        return (Grille3D)super.clone();
+    }
 
 }
