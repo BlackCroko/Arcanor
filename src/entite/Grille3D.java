@@ -109,6 +109,46 @@ public class Grille3D implements Runnable {
 		return cpt;
 	}
 
+	public int scoreCaché(int Joueur) {
+		int cpt = 0;
+		int j;
+		if (Joueur == 0)
+			j = 6;
+		else
+			j = 0;
+
+		for (int i = 0; i < 7; i++) {
+			if (grille[i][j].length > 1)
+				for (int k = 1; k < grille[i][j].length; k++) {
+					if (grille[i][j][0] < 5 && Joueur == 0)
+						cpt += grille[i][j][0];
+					if (grille[i][j][0] > 4 && Joueur == 1)
+						cpt += (grille[i][j][0] - 4);
+				}
+		}
+		return cpt;
+	}
+	
+	public int scoreMangé(int Joueur) {
+		int cpt = 0;
+		int j;
+		if (Joueur == 0)
+			j = 6;
+		else
+			j = 0;
+
+		for (int i = 0; i < 7; i++) {
+			if (grille[i][j].length > 1)
+				for (int k = 1; k < grille[i][j].length; k++) {
+					if (grille[i][j][0] < 5 && Joueur == 1)
+						cpt += grille[i][j][0];
+					if (grille[i][j][0] > 4 && Joueur == 0)
+						cpt += (grille[i][j][0] - 4);
+				}
+		}
+		return cpt;
+	}
+
 	public boolean isJouable(int x1, int y1, int x2, int y2, int Joueur) {
 		if ((x2 < 0 || x2 >= 8) || (y2 < 0 || y2 >= 7))
 			return false;
@@ -183,14 +223,12 @@ public class Grille3D implements Runnable {
 			} else
 				joueur = 0;
 
-			
+			for (int z = 0; z < fils.size(); z++) {
+				// fils.get(z).affichage2D();
+				c++;
+				fils.get(z).solve(joueur, c);
+			}
 
-				for (int z = 0; z < fils.size(); z++) {
-					// fils.get(z).affichage2D();
-					c++;
-					fils.get(z).solve(joueur, c);
-				}
-			
 		}
 	}
 
