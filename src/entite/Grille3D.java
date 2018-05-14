@@ -165,10 +165,10 @@ public class Grille3D implements Runnable {
 	}
 
 	public void solve(int joueur, double c) {
-		if (score(0) >= 1 || score(1) >= 1) {
+		/*if (score(0) >= 1 || score(1) >= 1) {
 			System.out.println(c);
 			affichage2D();
-		} else {
+		} else {*/
 			boolean extraire;
 			for (int i = 0; i < grille.length; i++) {
 				for (int j = 0; j < grille[i].length; j++) {
@@ -219,9 +219,9 @@ public class Grille3D implements Runnable {
 				fils.get(z).solve(joueur, c);
 			}*/
 
-			System.out.println(scoreMange(joueur)+"  "+scoreCache(joueur));
+			System.out.println("score j1 : "+score(0)+"   score j2 : "+score(1)+"  score mangé : "+scoreMange(joueur)+"   score caché :"+scoreCache(joueur));
 			
-		}
+//		}
 	}
 
 	@Override
