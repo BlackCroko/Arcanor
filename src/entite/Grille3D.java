@@ -1,8 +1,12 @@
 package entite;
 
-public class Grille3D implements Cloneable{
+public class Grille3D{
 
 	private int[][][] grille = new int[8][7][4];
+	
+	public Grille3D(){
+		
+	}
 
 	public Grille3D(Grille G) {
 		Case[][] g = G.getGrille();
@@ -20,9 +24,6 @@ public class Grille3D implements Cloneable{
 				}
 			}
 		}
-		affichage();
-		deplacement(0, 0, 0, 1, false);
-		affichage();
 	}
 
 	public void affichage() {
@@ -37,27 +38,34 @@ public class Grille3D implements Cloneable{
 			System.out.println("");
 		}
 	}
+	
+	public void affichage2D(){
+		for (int i = 0; i < grille[0].length; i++) {
+			System.out.println("+-+-+-+-+-+-+-+-+");
+			for (int j = 0; j < grille.length; j++) {
+					System.out.print("|" + (grille[j][i][0]));
+				}
+			System.out.println("|");
+			}
+		System.out.println("+-+-+-+-+-+-+-+-+");
+		System.out.println();
+		System.out.println();
+	}
 
 	public Grille3D deplacement(int x1, int y1, int x2, int y2, boolean extraire) {
-        Grille3D g = null;
-        try {
-            g = (Grille3D) this.clone();
-        } catch (CloneNotSupportedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        if (extraire || g.getGrille()[x2][y2][0] != 0) {
-            descente(x2, y2);
-            g.getGrille()[x2][y2][0] = g.getGrille()[x1][y1][0];
-            remonter(x1, y1);
+        Grille3D G = clone();
+        int[][][] g = G.getGrille();
+        if (extraire || g[x2][y2][0] != 0) {
+            G.descente(x2, y2);
+            g[x2][y2][0] = g[x1][y1][0];
+            G.remonter(x1, y1);
         } else {
             for (int i = 0; i < 4; i++) {
-                g.getGrille()[x2][y2][i] = g.getGrille()[x1][y1][i];
-                g.getGrille()[x1][y1][i] = 0;
+                g[x2][y2][i] = g[x1][y1][i];
+                g[x1][y1][i] = 0;
             }
         }
-        g.affichage();
-        return g;
+        return G;
     }
 
 	public void remonter(int x, int y) {
@@ -75,6 +83,12 @@ public class Grille3D implements Cloneable{
 
 	public int[][][] getGrille() {
 		return grille;
+	}
+	
+	
+
+	public void setGrille(int[][][] grille) {
+		this.grille = grille;
 	}
 
 	public int score(int Joueur) {
@@ -104,8 +118,19 @@ public class Grille3D implements Cloneable{
 			return false;
 	}
 	
-	public Grille3D clone() throws CloneNotSupportedException {
-        return (Grille3D)super.clone();
+	public Grille3D clone(){
+        Grille3D G = new Grille3D();
+        int[][][] g = new int[8][7][4];
+		for (int i = 0; i < g.length; i++) {
+			for (int j = 0; j < g[i].length; j++) {
+				for(int k = 0; k < g[i][j].length; k++){
+					g[i][j][k] = grille[i][j][k];
+				}
+				
+			}
+		}
+		G.setGrille(g);
+        return G;
     }
 
 }

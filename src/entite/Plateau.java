@@ -249,7 +249,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 
 		ordi = new IA(grille);
 		if (joueurActuel == 1) {
-		//	ordi.solve();
+			ordi.solve(1);
 		}
 	}
 

@@ -4,79 +4,56 @@ import java.util.ArrayList;
 
 public class IA {
 
-	ArrayList<Grille> fils = new ArrayList<Grille>();
+	ArrayList<Grille3D> fils = new ArrayList<Grille3D>();
 	Grille3D G;
+	boolean extraire = false;
 
 	public IA(Grille grille) {
 		G = new Grille3D(grille);
 	}
 
-	public void solve() {
-		
-		for (int k = 0; k < G.getGrille().length; k++) {
-			System.out.println("+-+-+-+-+-+-+-+");
-			for (int l = 0; l < G.getGrille()[k].length; l++) {
-				if (G.getGrille()[k][l].Contenu() != null) {
-					if (G.getGrille()[k][l].Contenu().getJoueur() == 1) {
-						int x = G.getGrille()[k][l].Contenu().getLigne();
-						int y = G.getGrille()[k][l].Contenu().getCol();
-						for (int i = 0; i < G.getGrille().length; i++) {
-							for (int j = 0; j < G.getGrille()[i].length; j++) {
+	public void solve(int joueur) {
 
-								if (G.getGrille()[i][j].getLigne() == x + 1 && G.getGrille()[i][j].getCol() == y + 1) {
-									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu())){
-									//	fils.add(G.deplacement(x, y, x + 1, y + 1, false));
-									System.out.println("test1");
-									}
-								}
-								if (G.getGrille()[i][j].getLigne() == x && G.getGrille()[i][j].getCol() == y + 1) {
-									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu())){
-										fils.add(G.deplacement(x, y, x, y + 1, false));
-										System.out.println("je recule");
-									}
-								}
-								if (G.getGrille()[i][j].getLigne() == x - 1 && G.getGrille()[i][j].getCol() == y + 1) {
-									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu()))
-//										fils.add(G.deplacement(x, y, x - 1, y + 1, false));
-										System.out.print("");
-								}
-								if (G.getGrille()[i][j].getLigne() == x + 1 && G.getGrille()[i][j].getCol() == y) {
-									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu()))
-//										fils.add(G.deplacement(x, y, x + 1, y, false));
-										System.out.print("");
-								}
-								if (G.getGrille()[i][j].getLigne() == x + 1 && G.getGrille()[i][j].getCol() == y - 1) {
-									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu()))
-//										fils.add(G.deplacement(x, y, x + 1, y - 1, false));
-									System.out.print("");
-								}
-								if (G.getGrille()[i][j].getLigne() == x && G.getGrille()[i][j].getCol() == y - 1) {
-									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu()))
-//										fils.add(G.deplacement(x, y, x, y - 1, false));
-										System.out.print("");
-								}
-								if (G.getGrille()[i][j].getLigne() == x - 1 && G.getGrille()[i][j].getCol() == y - 1) {
-									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu()))
-										//fils.add(G.deplacement(x, y, x - 1, y - 1, false));
-										System.out.print("");
-								}
-								if (G.getGrille()[i][j].getLigne() == x - 1 && G.getGrille()[i][j].getCol() == y) {
-									if (G.getGrille()[i][j].isJouable(G.getGrille()[k][l].Contenu()))
-//										fils.add(G.deplacement(x, y, x - 1, y, false));
-										System.out.print("");
-								}
-							}
-						}
+		for (int i = 0; i < G.getGrille().length; i++) {
+			for (int j = 0; j < G.getGrille()[i].length; j++) {
+				if ((G.getGrille()[i][j][0] - 1) / 4 == joueur) {
+					for(int k = 0; k < 2; k++){
+						if(k == 0)
+							extraire = false;
+						else extraire = true;
+					if (G.isJouable(i, j, i + 1, j + 1, joueur)) {
+						 fils.add(G.deplacement(i, j, i + 1, j + 1, extraire));
 					}
-					System.out.print("|" + (G.getGrille()[k][l].Contenu().getJoueur() + 1));
-				} else
-					System.out.print("|0");
+					if (G.isJouable(i, j, i, j + 1, joueur)) {
+						fils.add(G.deplacement(i, j, i, j + 1, extraire));
+					}
+					if (G.isJouable(i, j, i - 1, j + 1, joueur)) {
+						 fils.add(G.deplacement(i, j, i - 1, j + 1, extraire));
+					}
+					if (G.isJouable(i, j, i + 1, j, joueur)) {
+						 fils.add(G.deplacement(i, j, i + 1, j, extraire));
+					}
+					if (G.isJouable(i, j, i + 1, j - 1, joueur)) {
+						 fils.add(G.deplacement(i, j, i + 1, j - 1, extraire));
+					}
+					if (G.isJouable(i, j, i, j - 1, joueur)) {
+						 fils.add(G.deplacement(i, j, i, j - 1, extraire));
+					}
+					if (G.isJouable(i, j, i - 1, j - 1, joueur)) {
+						 fils.add(G.deplacement(i, j, i - 1, j - 1, extraire));
+					}
+					if (G.isJouable(i, j, i - 1, j, joueur)) {
+						 fils.add(G.deplacement(i, j, i - 1, j, extraire));
+					}
+					}
+				}
 			}
-			System.out.println("|");
 		}
-		System.out.println("+-+-+-+-+-+-+-+");
-		System.out.println();
-		System.out.println();
+		
+		for(int z = 0; z < fils.size(); z++){
+			fils.get(z).affichage2D();
+		}
+
 	}
 
 }
