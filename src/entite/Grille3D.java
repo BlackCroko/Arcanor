@@ -210,13 +210,19 @@ public class Grille3D implements Runnable {
 				}
 			}
 
-			if (joueur == 0) {
+			/*if (joueur == 0) {
 				joueur = 1;
 			} else
 				joueur = 0;
 
-			System.out.println(scoreMange(joueur)+""+scoreCache(joueur));
+			for (int z = 0; z < fils.size(); z++) {
+				// fils.get(z).affichage2D();
+				c++;
+				fils.get(z).solve(joueur, c);
+			}*/
 
+			System.out.println(scoreMange(joueur)+""+scoreCache(joueur));
+			
 		}
 	}
 
