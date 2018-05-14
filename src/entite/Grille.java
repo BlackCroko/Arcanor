@@ -63,13 +63,13 @@ public class Grille implements Cloneable{
 		for(int i = 0; i < grille.length; i++){
 			if(grille[i][grille[0].length - 1].Contenu() != null)
 			if (grille[i][grille[0].length - 1].Contenu().getJoueur() == 0) {
-				pointj2 += grille[i][grille[0].length - 1].Contenu().getPoint();
+				pointj1 += grille[i][grille[0].length - 1].Contenu().getPoint();
 				grille[i][grille[0].length - 1].Contenu().setFin(true);
 				// Victoire(troupe);
 			}
 			if(grille[i][0].Contenu() != null)
 			if (grille[i][0].Contenu().getJoueur() == 1) {
-				pointj1 += grille[i][0].Contenu().getPoint();
+				pointj2 += grille[i][0].Contenu().getPoint();
 				grille[i][0].Contenu().setFin(true);
 				// Victoire(troupe);
 			}
