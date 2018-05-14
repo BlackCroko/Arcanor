@@ -109,7 +109,7 @@ public class Grille3D implements Runnable {
 		return cpt;
 	}
 
-	public int scoreCaché(int Joueur) {
+	public int scoreCache(int Joueur) {
 		int cpt = 0;
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -125,7 +125,7 @@ public class Grille3D implements Runnable {
 		return cpt;
 	}
 
-	public int scoreMangé(int Joueur) {
+	public int scoreMange(int Joueur) {
 		int cpt = 0;
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -215,11 +215,7 @@ public class Grille3D implements Runnable {
 			} else
 				joueur = 0;
 
-			for (int z = 0; z < fils.size(); z++) {
-				// fils.get(z).affichage2D();
-				c++;
-				fils.get(z).solve(joueur, c);
-			}
+			System.out.println(scoreMange(joueur)+""+scoreCache(joueur));
 
 		}
 	}
