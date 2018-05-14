@@ -111,40 +111,32 @@ public class Grille3D implements Runnable {
 
 	public int scoreCaché(int Joueur) {
 		int cpt = 0;
-		int j;
-		if (Joueur == 0)
-			j = 6;
-		else
-			j = 0;
-
 		for (int i = 0; i < 7; i++) {
-			if (grille[i][j].length > 1)
-				for (int k = 1; k < grille[i][j].length; k++) {
-					if (grille[i][j][0] < 5 && Joueur == 0)
-						cpt += grille[i][j][0];
-					if (grille[i][j][0] > 4 && Joueur == 1)
-						cpt += (grille[i][j][0] - 4);
-				}
+			for (int j = 0; j < 8; j++) {
+				if (grille[i][j].length > 1)
+					for (int k = 1; k < grille[i][j].length; k++) {
+						if (grille[i][j][k] < 5 && Joueur == 0)
+							cpt += grille[i][j][0];
+						if (grille[i][j][k] > 4 && Joueur == 1)
+							cpt += (grille[i][j][0] - 4);
+					}
+			}
 		}
 		return cpt;
 	}
-	
+
 	public int scoreMangé(int Joueur) {
 		int cpt = 0;
-		int j;
-		if (Joueur == 0)
-			j = 6;
-		else
-			j = 0;
-
 		for (int i = 0; i < 7; i++) {
-			if (grille[i][j].length > 1)
-				for (int k = 1; k < grille[i][j].length; k++) {
-					if (grille[i][j][0] < 5 && Joueur == 1)
-						cpt += grille[i][j][0];
-					if (grille[i][j][0] > 4 && Joueur == 0)
-						cpt += (grille[i][j][0] - 4);
-				}
+			for (int j = 0; j < 8; j++) {
+				if (grille[i][j].length > 1)
+					for (int k = 1; k < grille[i][j].length; k++) {
+						if (grille[i][j][k] < 5 && Joueur == 1)
+							cpt += grille[i][j][0];
+						if (grille[i][j][k] > 4 && Joueur == 0)
+							cpt += (grille[i][j][0] - 4);
+					}
+			}
 		}
 		return cpt;
 	}
