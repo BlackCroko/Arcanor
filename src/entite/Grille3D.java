@@ -111,9 +111,8 @@ public class Grille3D implements Runnable {
 
 	public int scoreCache(int Joueur) {
 		int cpt = 0;
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (grille[i][j].length > 1)
+		for (int i = 0; i < grille.length; i++) {
+			for (int j = 0; j < grille[i].length; j++) {
 					for (int k = 1; k < grille[i][j].length; k++) {
 						if (grille[i][j][k] < 5 && Joueur == 0)
 							cpt += grille[i][j][0];
@@ -127,9 +126,8 @@ public class Grille3D implements Runnable {
 
 	public int scoreMange(int Joueur) {
 		int cpt = 0;
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (grille[i][j].length > 1)
+		for (int i = 0; i < grille.length; i++) {
+			for (int j = 0; j < grille[i].length; j++) {
 					for (int k = 1; k < grille[i][j].length; k++) {
 						if (grille[i][j][k] < 5 && Joueur == 1)
 							cpt += grille[i][j][0];
@@ -221,7 +219,7 @@ public class Grille3D implements Runnable {
 				fils.get(z).solve(joueur, c);
 			}*/
 
-			System.out.println(scoreMange(joueur)+""+scoreCache(joueur));
+			System.out.println(scoreMange(joueur)+"  "+scoreCache(joueur));
 			
 		}
 	}
