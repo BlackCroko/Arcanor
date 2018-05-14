@@ -11,10 +11,14 @@ public class IA {
 	public IA(Grille grille) {
 		G = new Grille3D(grille);
 	}
+	
+	public IA(Grille3D grille){
+		G = grille;
+	}
 
 	public void solve(int joueur) {
-
-		for (int i = 0; i < G.getGrille().length; i++) {
+		G.solve(1, 0);
+		/*for (int i = 0; i < G.getGrille().length; i++) {
 			for (int j = 0; j < G.getGrille()[i].length; j++) {
 				if ((G.getGrille()[i][j][0] - 1) / 4 == joueur) {
 					for(int k = 0; k < 2; k++){
@@ -51,8 +55,12 @@ public class IA {
 		}
 		
 		for(int z = 0; z < fils.size(); z++){
-			fils.get(z).affichage2D();
-		}
+			if(joueur == 0){
+				joueur = 1;
+			}else 
+				joueur = 0;
+			fils.get(z).
+		}*/
 
 	}
 
