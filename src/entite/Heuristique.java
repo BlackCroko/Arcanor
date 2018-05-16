@@ -2,19 +2,28 @@ package entite;
 
 public class Heuristique {
 
-	public static final double MAX_NOTE = Double.MAX_VALUE;
+	public static final int MAX_NOTE = Integer.MAX_VALUE;
 
-	public static final double MIN_NOTE = Double.MIN_VALUE;
+	public static final int MIN_NOTE = Integer.MIN_VALUE;
 
-	public double noteGrille(int[][][] grille, int joueur) {
-		return Math.random();
+	public int noteGrille(int[][][] grille, int joueur) {
+
+		if (joueur == 0)
+			if (score(grille, joueur) >= 12)
+				return MAX_NOTE;
+			else if (score(grille, 1) >= 12)
+				return MIN_NOTE;
+		if (joueur == 1)
+			if (score(grille, joueur) >= 12)
+				return MAX_NOTE;
+			else if (score(grille, 0) >= 12)
+				return MIN_NOTE;
+
+		return scoredistance(grille, joueur) + 5 * scoreCache(grille, joueur) + 5 * scoreMange(grille, joueur)
+				+ 15 * score(grille, joueur);
 	}
 
-	public double scoredistance(int[][][] grille, int joueur) {
-		// TODO point en fonction de la distance a la ligne adverse
-		// exemple a 1case tu marque 10 pts, a 2 cases 8 etc apres tu cherches pour
-		// avoir des points equilibré ++ dernière ligne et regarder si chemin est libre
-		// ou s'il faut faire des détours
+	public int scoredistance(int[][][] grille, int joueur) {
 		int cpt = 0;
 
 		for (int i = 0; i < grille.length; i++) {
