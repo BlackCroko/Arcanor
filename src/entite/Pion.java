@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class Pion extends Circle implements Cloneable {
+public class Pion extends Circle implements Runnable {
 
 	boolean selected;
 	/** numero du joueur associe */
@@ -27,12 +27,16 @@ public class Pion extends Circle implements Cloneable {
 	private int col;
 	private int taille;
 	private int point;
+	
+	private double x;
+	private double y;
+	private boolean extraire;
 
 	private Pion fils = null;
 
 	private boolean Fin = false;
 
-	public Pion(double startX, double startY, double taillebase, int taille, int _joueur, int ligne, int col) {
+	public Pion(double startX, double startY, double taillebase, int taille, int _joueur, int ligne, int col){
 		super(startX, startY, taillebase / taille);
 		this.taille = taille;
 		this.point = taille;
@@ -45,15 +49,20 @@ public class Pion extends Circle implements Cloneable {
 	}
 
 	public void deplacement(double x, double y, boolean extraire) {
-
+		this.x = x;
+		this.y = y;
+		this.extraire = extraire;
 		int tps = 300;
-		Timeline timeline = new Timeline();
+		
 		if (fils != null) {
 			fils.deplacement(x, y, extraire);
 		}
+		Thread t = new Thread(this);
+		t.start();
+		/*Timeline timeline = new Timeline();
 		timeline.getKeyFrames().addAll(new KeyFrame(new Duration(tps), new KeyValue(this.centerXProperty(), x),
 				new KeyValue(this.centerYProperty(), y), new KeyValue(this.fillProperty(), this.getCj())));
-		timeline.play();
+		timeline.play();*/
 
 	}
 
@@ -133,6 +142,15 @@ public class Pion extends Circle implements Cloneable {
 
 	public Pion clone() throws CloneNotSupportedException {
 		return (Pion) super.clone();
+	}
+
+	@Override
+	public void run() {
+		int tps = 300;
+		Timeline timeline = new Timeline();
+		timeline.getKeyFrames().addAll(new KeyFrame(new Duration(tps), new KeyValue(this.centerXProperty(), x),
+				new KeyValue(this.centerYProperty(), y), new KeyValue(this.fillProperty(), this.getCj())));
+		timeline.play();
 	}
 
 }

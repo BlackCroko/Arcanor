@@ -102,13 +102,13 @@ public class Menu extends Group implements EventHandler<MouseEvent> {
 		// Action for btnLogin
 		M1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
-				generatePlateau();
+				generatePlateau(true);
 			}
 		});
 
 		M2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
-				generatePlateau();
+				generatePlateau(false);
 			}
 		});
 
@@ -144,8 +144,8 @@ public class Menu extends Group implements EventHandler<MouseEvent> {
 
 	}
 
-	public void generatePlateau() {
-		Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait);
+	public void generatePlateau(boolean IA) {
+		Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait, IA);
 		this.getChildren().clear();
 		this.getChildren().addAll(plateau.dessinEnvironnement());
 	}

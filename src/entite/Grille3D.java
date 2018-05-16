@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Grille3D implements Runnable {
 
 	private int[][][] grille = new int[8][7][4];
+	private CoupJoue coup;
 
 	public Grille3D() {
 
@@ -67,6 +68,7 @@ public class Grille3D implements Runnable {
 				g[x1][y1][i] = 0;
 			}
 		}
+		G.coup = new CoupJoue(x1,y1,x2,y2, extraire);
 		return G;
 	}
 
@@ -104,7 +106,7 @@ public class Grille3D implements Runnable {
 			return false;
 
 		if (grille[x2][y2][0] == 0 || (Joueur == 0 && grille[x2][y2][0] - 4 == grille[x1][y1][0] + 1)
-				|| (Joueur == 1 && grille[x2][y2][0] + 1 == grille[x1][y1][0] - 4))
+				|| (Joueur == 1 && grille[x2][y2][0] - 1 == grille[x1][y1][0] - 4))
 			return true;
 		else
 			return false;
@@ -181,5 +183,15 @@ public class Grille3D implements Runnable {
 	public void run() {
 
 	}
+
+	public CoupJoue getCoup() {
+		return coup;
+	}
+
+	public void setCoup(CoupJoue coup) {
+		this.coup = coup;
+	}
+	
+	
 
 }

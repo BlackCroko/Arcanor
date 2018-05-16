@@ -43,7 +43,7 @@ public class Appli extends Application {
 	void construirePlateauJeu(Stage primaryStage) {
 		// definir la scene principale
 		Menu menu = new Menu(decalage, tailleCase, decalageTrait);
-		Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait);
+		//Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait);
 		Group troupe = new Group();
 		//troupe = plateau.dessinEnvironnement();
 		troupe = menu;

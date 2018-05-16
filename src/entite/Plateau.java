@@ -32,13 +32,14 @@ public class Plateau implements EventHandler<MouseEvent> {
 	Choix C2;
 
 	int joueurActuel = 0;
-
+	private boolean IA;
 	private IA ordi;
 
-	public Plateau(int decalage, int tailleCase, int decalageTrait) {
+	public Plateau(int decalage, int tailleCase, int decalageTrait, boolean IA) {
 		this.decalage = decalage;
 		this.tailleCase = tailleCase;
 		this.decalageTrait = decalageTrait;
+		this.IA = IA;
 	}
 
 	public Group dessinEnvironnement() {
@@ -242,10 +243,17 @@ public class Plateau implements EventHandler<MouseEvent> {
 		else
 			joueurActuel = 0;
 		score.switchTrait(joueurActuel);
+		if (IA) {
+			ordi = new IA(grille);
+			if (joueurActuel == 1) {
+				long start = System.nanoTime();
 
-		ordi = new IA(grille);
-		if (joueurActuel == 1) {
-			ordi.solve(1);
+				CoupJoue coup = ordi.solve(1);
+				long end = System.nanoTime();
+				System.out.println("le temps de calcul est de " + (end - start) / 1000000 + " secondes");
+				grille.deplacement(coup.getX1(), coup.getY1(), coup.getX2(), coup.getY2(), coup.isExtraire());
+				switchJoueur();
+			}
 		}
 	}
 
@@ -265,15 +273,16 @@ public class Plateau implements EventHandler<MouseEvent> {
 			Timeline timeline = new Timeline();
 			for (Node circle : troupe.getChildren()) {
 				circle.setVisible(true);
-				timeline.getKeyFrames().addAll(new KeyFrame(Duration.ZERO, // set start
-																			// position at 0
-						new KeyValue(circle.translateXProperty(), circle.getLayoutX()),
-						new KeyValue(circle.translateYProperty(), circle.getLayoutY())),
-						new KeyFrame(new Duration(30000), // set end
-															// position
-															// at 40s
-								new KeyValue(circle.translateXProperty(), Math.random() * 800),
-								new KeyValue(circle.translateYProperty(), Math.random() * 600)));
+				timeline.getKeyFrames()
+						.addAll(new KeyFrame(Duration.ZERO, // set start
+															// position at 0
+								new KeyValue(circle.translateXProperty(), circle.getLayoutX()),
+								new KeyValue(circle.translateYProperty(), circle.getLayoutY())),
+								new KeyFrame(new Duration(30000), // set end
+																	// position
+																	// at 40s
+										new KeyValue(circle.translateXProperty(), Math.random() * 800),
+										new KeyValue(circle.translateYProperty(), Math.random() * 600)));
 			}
 
 			// play 40s of animation

@@ -18,11 +18,20 @@ public class IA {
 		G = grille;
 	}
 
-	public void solve(int joueur) {
-		//G.solve(1, 0);
-
-		System.out.println(this.alphabeta(G, joueur, 1));
-		System.out.println(Heuristique.MIN_NOTE);
+	public CoupJoue solve(int joueur) {
+		
+		Grille3D deplacement;
+		double max = Heuristique.MIN_NOTE;
+		ArrayList<Grille3D> fils = G.generatePossibilite(joueur);
+		deplacement = fils.get(0);
+		for(int i=1; i < fils.size() ; i++){
+			double valeur = this.alphabeta(fils.get(i), joueur, 2);
+			if(max < valeur){
+				max = valeur;
+				deplacement = fils.get(i);
+			}
+		}
+		return deplacement.getCoup();
 	}
 	
 	private double alphabeta(Grille3D grille, int joueur, int profondeur){
@@ -39,16 +48,13 @@ public class IA {
 			double valeurDeJeu = Heuristique.MAX_NOTE;
 			ArrayList<Grille3D> filsmin = new ArrayList<Grille3D>();
 			filsmin = grille.generatePossibilite(joueur);
-			for(int i=1; i <= filsmin.size() ; i++){
+			for(int i=1; i < filsmin.size() ; i++){
 						valeurDeJeu = Math.min(valeurDeJeu, this.max(filsmin.get(i), joueur, profondeur-1, alpha, beta));
-						
 						if(alpha >= valeurDeJeu){
 							return valeurDeJeu; // Coupure alpha
 						}
 						
 		               beta = Math.min(beta, valeurDeJeu);
-						
-
 			}
 			return valeurDeJeu;
 		}else{
@@ -64,10 +70,8 @@ public class IA {
 			double valeurDeJeu = Heuristique.MIN_NOTE;
 			ArrayList<Grille3D> filsmax = new ArrayList<Grille3D>();
 			filsmax = grille.generatePossibilite(joueur);
-			System.out.println(filsmax.size());
-			for(int i=1; i <= fils.size(); i++){
+			for(int i=0; i < filsmax.size(); i++){
 						valeurDeJeu = Math.max(valeurDeJeu, this.min(filsmax.get(i), joueur, profondeur-1, alpha, beta));
-						System.out.println("valeur de jeu : "+valeurDeJeu);
 						if(valeurDeJeu >= beta){
 							return valeurDeJeu; // Coupure beta
 						}
