@@ -23,9 +23,11 @@ public class Grille implements Cloneable {
 	}
 
 	public void deplacement(int x1, int y1, int x2, int y2, boolean extraire) {
+		boolean suppr = false;
 		Pion pion = grille[x1][y1].Contenu();
 		Case dest = grille[x2][y2];
 		if (extraire || dest.Contenu() != null) {
+			suppr = true;
 			grille[x1][y1].placePion(pion.getFils());
 			if (pion.getFils() != null) {
 				pion.getFils().setVisible(true);
@@ -45,7 +47,7 @@ public class Grille implements Cloneable {
 
 		for (int i = 0; i < grille.length; i++) {
 			for (int j = 0; j < grille[i].length; j++) {
-				if (grille[i][j].getLigne() == x1 && grille[i][j].getCol() == y1 && !extraire) {
+				if (grille[i][j].getLigne() == x1 && grille[i][j].getCol() == y1 && !suppr) {
 					grille[i][j].supprPion();
 				}
 				if (grille[i][j].getLigne() == pion.getLigne() && grille[i][j].getCol() == pion.getCol()) {
