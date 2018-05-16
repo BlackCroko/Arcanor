@@ -103,8 +103,8 @@ public class Grille3D implements Runnable {
 		if (j == y1)
 			return false;
 
-		if (grille[x2][y2][0] == 0 || (Joueur == 0 && grille[x2][y2][0] - 4 == grille[x1][y1][0] + 1 && y2 != (grille[0].length-1))
-				|| (Joueur == 1 && grille[x2][y2][0] - 1 == grille[x1][y1][0] - 4 && y2 != 0))
+		if (grille[x2][y2][0] == 0 || (Joueur == 0 && grille[x2][y2][0] - 4 == grille[x1][y1][0] + 1 && y2 != 0)
+				|| (Joueur == 1 && grille[x2][y2][0] - 1 == grille[x1][y1][0] - 4 && y2 != (grille[0].length-1)))
 			return true;
 		else
 			return false;
