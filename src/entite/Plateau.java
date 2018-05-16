@@ -244,7 +244,6 @@ public class Plateau implements EventHandler<MouseEvent> {
 			joueurActuel = 0;
 		score.switchTrait(joueurActuel);
 		ordi = new IA(grille);
-		ordi.G.affichage2D();
 		Heuristique h = new Heuristique();
 		System.out.println();
 		if (IA) {
