@@ -92,52 +92,6 @@ public class Grille3D implements Runnable {
 		this.grille = grille;
 	}
 
-	public int score(int Joueur) {
-		int cpt = 0;
-		int j;
-		if (Joueur == 0)
-			j = 6;
-		else
-			j = 0;
-
-		for (int i = 0; i < 7; i++) {
-			if (grille[i][j][0] < 5 && Joueur == 0)
-				cpt += grille[i][j][0];
-			if (grille[i][j][0] > 4 && Joueur == 1)
-				cpt += (grille[i][j][0] - 4);
-		}
-		return cpt;
-	}
-
-	public int scoreCache(int Joueur) {
-		int cpt = 0;
-		for (int i = 0; i < grille.length; i++) {
-			for (int j = 0; j < grille[i].length; j++) {
-					for (int k = 1; k < grille[i][j].length; k++) {
-						if (grille[i][j][k] < 5 && Joueur == 0 && j != 6)
-							cpt += grille[i][j][k];
-						if (grille[i][j][k] > 4 && Joueur == 1 && j != 0)
-							cpt += (grille[i][j][k] - 4);
-					}
-			}
-		}
-		return cpt;
-	}
-
-	public int scoreMange(int Joueur) {
-		int cpt = 0;
-		for (int i = 0; i < grille.length; i++) {
-			for (int j = 0; j < grille[i].length; j++) {
-					for (int k = 1; k < grille[i][j].length; k++) {
-						if (grille[i][j][0] > 4 && grille[i][j][k] < 5 && Joueur == 1)
-							cpt += grille[i][j][k];
-						if (grille[i][j][0] > 5 && grille[i][j][k] > 4 && Joueur == 0)
-							cpt += (grille[i][j][k] - 4);
-					}
-			}
-		}
-		return cpt;
-	}
 
 	public boolean isJouable(int x1, int y1, int x2, int y2, int Joueur) {
 		if ((x2 < 0 || x2 >= 8) || (y2 < 0 || y2 >= 7))
@@ -219,8 +173,7 @@ public class Grille3D implements Runnable {
 				fils.get(z).solve(joueur, c);
 			}*/
 
-			System.out.println("score j1 : "+score(0)+"   score j2 : "+score(1)+"  score mangé : "+scoreMange(joueur)+"   score caché : "+scoreCache(joueur));
-			
+
 //		}
 	}
 
