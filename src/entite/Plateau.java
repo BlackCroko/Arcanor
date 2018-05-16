@@ -243,6 +243,11 @@ public class Plateau implements EventHandler<MouseEvent> {
 		else
 			joueurActuel = 0;
 		score.switchTrait(joueurActuel);
+		ordi = new IA(grille);
+		Heuristique h = new Heuristique();
+		System.out.println(h.scoreCache(ordi.G.getGrille(), 0));
+		System.out.println(h.scoreCache(ordi.G.getGrille(), 1));
+		System.out.println();
 		if (IA) {
 			ordi = new IA(grille);
 			if (joueurActuel == 1) {
