@@ -1,8 +1,19 @@
 package entite;
 
 public class Heuristique {
+	
+	public static final double MAX_NOTE = Double.MAX_VALUE;
+	
+	public static final double MIN_NOTE = Double.MIN_VALUE;
 
 	public double noteGrille(int[][][] grille, int joueur) {
+		return Math.random();
+	}
+	
+	public double scoredistance(int[][][] grille, int joueur){
+		//TODO point en fonction de la distance a la ligne adverse
+		// exemple a 1case tu marque 10 pts, a 2 cases 8 etc apres tu cherches pour avoir des points equilibré
+		
 		return 0;
 	}
 

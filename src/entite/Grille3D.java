@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class Grille3D implements Runnable {
 
 	private int[][][] grille = new int[8][7][4];
-	private ArrayList<Grille3D> fils = new ArrayList<Grille3D>();
-	private int joueurdepart;
 
 	public Grille3D() {
 
@@ -127,11 +125,8 @@ public class Grille3D implements Runnable {
 		return G;
 	}
 
-	public void solve(int joueur, double c) {
-		/*
-		 * if (score(0) >= 1 || score(1) >= 1) { System.out.println(c); affichage2D(); }
-		 * else {
-		 */
+	public ArrayList<Grille3D> generatePossibilite(int joueur) {
+		ArrayList<Grille3D> fils = new ArrayList<Grille3D>();
 		boolean extraire;
 		for (int i = 0; i < grille.length; i++) {
 			for (int j = 0; j < grille[i].length; j++) {
@@ -179,6 +174,7 @@ public class Grille3D implements Runnable {
 		 */
 
 		// }
+		return fils;
 	}
 
 	@Override
