@@ -21,7 +21,7 @@ public class Heuristique {
 	}
 
 	public int scoredistance(int[][][] grille, int joueur) {
-		int cpt = 0;
+		int cpt = 0, temp =0;
 
 		for (int i = 0; i < grille.length; i++) {
 			for (int j = 0; j < grille[0].length; j++) {
@@ -29,35 +29,35 @@ public class Heuristique {
 				if (joueur == 0 && grille[i][j][0] < 5 && grille[i][j][0] != 0) {
 
 					if (j == 1)
-						cpt += 2;
+						temp = 2;
 					else if (j == 2)
-						cpt += 4;
+						temp = 4;
 					else if (j == 3)
-						cpt += 6;
+						temp = 6;
 					else if (j == 4)
-						cpt += 8;
+						temp = 8;
 					else if (j == 5)
-						cpt += 10;
+						temp = 10;
 					for (int k = 0; k < 2; k++) {
 						if (grille[i][j][k] < 5)
-							cpt += grille[i][j][k];
+							cpt = temp * grille[i][j][k];
 					}
 				}
 				if (joueur == 1 && grille[i][j][0] > 4 && grille[i][j][0] != 0) {
 
 					if (j == 5)
-						cpt += 2;
+						temp = 2;
 					else if (j == 4)
-						cpt += 4;
+						temp = 4;
 					else if (j == 3)
-						cpt += 6;
+						temp = 6;
 					else if (j == 2)
-						cpt += 8;
+						temp = 8;
 					else if (j == 1)
-						cpt += 10;
+						temp = 10;
 					for (int k = 0; k < 2; k++) {
 						if (grille[i][j][k] > 4)
-							cpt += grille[i][j][k] - 4;
+							cpt = temp * grille[i][j][k] - 4;
 					}
 				}
 			}
