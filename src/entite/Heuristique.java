@@ -57,7 +57,7 @@ public class Heuristique {
 						temp = 10;
 					for (int k = 0; k < 2; k++) {
 						if (grille[i][j][k] > 4)
-							cpt = temp * grille[i][j][k] - 4;
+							cpt = temp * (grille[i][j][k] - 4);
 					}
 				}
 			}
