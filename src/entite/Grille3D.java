@@ -68,7 +68,7 @@ public class Grille3D implements Runnable {
 				g[x1][y1][i] = 0;
 			}
 		}
-		G.coup = new CoupJoue(x1,y1,x2,y2, extraire);
+		G.coup = new CoupJoue(x1, y1, x2, y2, extraire);
 		return G;
 	}
 
@@ -93,8 +93,6 @@ public class Grille3D implements Runnable {
 	}
 
 	public boolean isJouable(int x1, int y1, int x2, int y2, int Joueur) {
-		// TODO si le pion est sur la ligne adverse : return false parce qu'il ne peut
-		// plus bouger
 		int j;
 		if ((x2 < 0 || x2 >= 8) || (y2 < 0 || y2 >= 7))
 			return false;
@@ -105,8 +103,8 @@ public class Grille3D implements Runnable {
 		if (j == y1)
 			return false;
 
-		if (grille[x2][y2][0] == 0 || (Joueur == 0 && grille[x2][y2][0] - 4 == grille[x1][y1][0] + 1)
-				|| (Joueur == 1 && grille[x2][y2][0] - 1 == grille[x1][y1][0] - 4))
+		if (grille[x2][y2][0] == 0 || (Joueur == 0 && grille[x2][y2][0] - 4 == grille[x1][y1][0] + 1 && y2 != (grille[0].length-1))
+				|| (Joueur == 1 && grille[x2][y2][0] - 1 == grille[x1][y1][0] - 4 && y2 != 0))
 			return true;
 		else
 			return false;
@@ -191,7 +189,5 @@ public class Grille3D implements Runnable {
 	public void setCoup(CoupJoue coup) {
 		this.coup = coup;
 	}
-	
-	
 
 }
