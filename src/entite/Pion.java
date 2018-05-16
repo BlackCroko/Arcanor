@@ -7,80 +7,77 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class Pion extends Circle implements Cloneable{
-	
+public class Pion extends Circle implements Cloneable {
+
 	boolean selected;
-	/**numero du joueur associe*/
+	/** numero du joueur associe */
 	int joueur;
-	/**couleur courante du jeton*/
+	/** couleur courante du jeton */
 	Color cj;
-	/**couleur pour joueur 1*/
+	/** couleur pour joueur 1 */
 	public static Color couleurJ1 = Color.SNOW;
-	/**couleur pour joueur 2*/
+	/** couleur pour joueur 2 */
 	public static Color couleurJ2 = Color.DARKSLATEGRAY;
-	/**couleur pour joueur 1 si jeton selectionne*/
+	/** couleur pour joueur 1 si jeton selectionne */
 	public static Color couleurJ1Selected = Color.GAINSBORO;
-	/**couleur pour joueur 2 si jeton selectionne*/
+	/** couleur pour joueur 2 si jeton selectionne */
 	public static Color couleurJ2Selected = Color.FORESTGREEN;
-	
+
 	private int ligne;
 	private int col;
 	private int taille;
 	private int point;
-	
+
 	private Pion fils = null;
-	
+
 	private boolean Fin = false;
 
 	public Pion(double startX, double startY, double taillebase, int taille, int _joueur, int ligne, int col) {
-		super(startX, startY, taillebase/taille);
+		super(startX, startY, taillebase / taille);
 		this.taille = taille;
 		this.point = taille;
-	    joueur = _joueur;
-	    selected = false;
-	    getColorPion();
-	    setFill(cj);
-	    this.ligne = ligne;
-	    this.col = col;
-	  }
-	
-	public void deplacement(double x, double y, boolean extraire){
-		
-		
-		
+		joueur = _joueur;
+		selected = false;
+		getColorPion();
+		setFill(cj);
+		this.ligne = ligne;
+		this.col = col;
+	}
+
+	public void deplacement(double x, double y, boolean extraire) {
+
 		int tps = 300;
 		Timeline timeline = new Timeline();
-		if(fils != null){
+		if (fils != null) {
 			fils.deplacement(x, y, extraire);
 		}
-		timeline.getKeyFrames()
-		.addAll(new KeyFrame(new Duration(tps), new KeyValue(this.centerXProperty(), x),
-				new KeyValue(this.centerYProperty(), y),
-				new KeyValue(this.fillProperty(), this.getCj())));
+		timeline.getKeyFrames().addAll(new KeyFrame(new Duration(tps), new KeyValue(this.centerXProperty(), x),
+				new KeyValue(this.centerYProperty(), y), new KeyValue(this.fillProperty(), this.getCj())));
 		timeline.play();
-		
+
 	}
-	   
-	  /**active ou desactive la selection du jeton*/
-	  public void switchSelected()
-	  {
-	    selected = !selected;
-	    getColorPion();
-	  }
-	   
-	  /**definit la bonne couleur pour le jeton en fonction du joueur et de son état sélectionné ou non
-	  *@return la couleur du jeton*/
-	  private Color getColorPion()
-	  {
-	    cj =  (selected? (joueur==0?couleurJ1Selected:couleurJ2Selected) : (joueur==0?couleurJ1:couleurJ2));
-	    return cj;
-	  }
-	   
-	  /**remplit le disque avec la couleur courante*/
-	  public void colorPion()
-	  {
-	    setFill(cj);
-	  }
+
+	/** active ou desactive la selection du jeton */
+	public void switchSelected() {
+		selected = !selected;
+		getColorPion();
+	}
+
+	/**
+	 * definit la bonne couleur pour le jeton en fonction du joueur et de son état
+	 * sélectionné ou non
+	 * 
+	 * @return la couleur du jeton
+	 */
+	private Color getColorPion() {
+		cj = (selected ? (joueur == 0 ? couleurJ1Selected : couleurJ2Selected) : (joueur == 0 ? couleurJ1 : couleurJ2));
+		return cj;
+	}
+
+	/** remplit le disque avec la couleur courante */
+	public void colorPion() {
+		setFill(cj);
+	}
 
 	public int getLigne() {
 		return ligne;
@@ -134,8 +131,8 @@ public class Pion extends Circle implements Cloneable{
 		Fin = fin;
 	}
 
-    public Pion clone() throws CloneNotSupportedException {   
-    	return (Pion)super.clone();
-    } 
-	
+	public Pion clone() throws CloneNotSupportedException {
+		return (Pion) super.clone();
+	}
+
 }

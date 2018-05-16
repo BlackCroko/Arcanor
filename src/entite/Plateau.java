@@ -60,7 +60,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 		C2 = new Choix(1, tailleCase);
 		troupe.getChildren().add(C1);
 		troupe.getChildren().add(C2);
-		
+
 		C1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
 				if (!C1.isSelected()) {
@@ -69,7 +69,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 				}
 			}
 		});
-		
+
 		C2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
 				if (!C2.isSelected()) {
@@ -78,7 +78,7 @@ public class Plateau implements EventHandler<MouseEvent> {
 				}
 			}
 		});
-		
+
 		troupe.getChildren().add(score);
 		total.getChildren().add(troupe);
 		return total;
@@ -217,18 +217,14 @@ public class Plateau implements EventHandler<MouseEvent> {
 			Case r = (Case) o;
 			if (r.getEtat() == Etat.possible) {
 				int x = pionSelectionne.getLigne();
-				int y = pionSelectionne.getCol();	
-				
+				int y = pionSelectionne.getCol();
+
 				pionSelectionne.switchSelected();
 
 				if (r.Contenu() != null || C2.isSelected()) {
 					grille.deplacement(x, y, r.getLigne(), r.getCol(), true);
 				} else
 					grille.deplacement(x, y, r.getLigne(), r.getCol(), false);
-				
-
-
-
 
 				grille.majPoint();
 				score.setScore(grille.getPointj1(), grille.getPointj2());

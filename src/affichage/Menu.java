@@ -74,10 +74,8 @@ public class Menu extends Group implements EventHandler<MouseEvent> {
 		HBox hb = new HBox();
 		hb.setPadding(new Insets(20, 20, 50, 70));
 
-        
-        ChoixMenu M1 = new ChoixMenu(100, 200, 200,300, 1);
-        ChoixMenu M2 = new ChoixMenu(430, 200, 200,300, 2);
-        
+		ChoixMenu M1 = new ChoixMenu(100, 200, 200, 300, 1);
+		ChoixMenu M2 = new ChoixMenu(430, 200, 200, 300, 2);
 
 		/*
 		 * //Reflection for gridPane Reflection r = new Reflection();
@@ -88,8 +86,6 @@ public class Menu extends Group implements EventHandler<MouseEvent> {
 		DropShadow dropShadow = new DropShadow();
 		dropShadow.setOffsetX(5);
 		dropShadow.setOffsetY(5);
-		
-
 
 		// Adding text and DropShadow effect to it
 		Text text = new Text("Arcanor");
@@ -109,13 +105,12 @@ public class Menu extends Group implements EventHandler<MouseEvent> {
 				generatePlateau();
 			}
 		});
-		
+
 		M2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent me) {
 				generatePlateau();
 			}
 		});
-
 
 		// Add HBox and GridPane layout to BorderPane Layout
 		bp.setTop(hb);
@@ -131,35 +126,28 @@ public class Menu extends Group implements EventHandler<MouseEvent> {
 		 * handle(MouseEvent me){ generatePlateau(); } });
 		 */
 	}
-	
-	public void changJoueur(){
-		/*Text text = new Text("Tour du joueur 1");
-		DropShadow dropShadow = new DropShadow();
-		dropShadow.setOffsetX(5);
-		dropShadow.setOffsetY(5);
-		
-	    text.setLayoutY(300);
-	    text.setLayoutX(-100); 
-	    text.setFill(Color.BLUE);
-		text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
-		text.setEffect(dropShadow);
-		this.getChildren().add(text);
-		
-		int tps = 3000;
-		Timeline timeline = new Timeline();
-		timeline.getKeyFrames()
-		.addAll(new KeyFrame(new Duration(tps), new KeyValue(text.translateXProperty(), 800)));
-		timeline.setCycleCount(3);
-		timeline.play();*/
-		
-		
-		
+
+	public void changJoueur() {
+		/*
+		 * Text text = new Text("Tour du joueur 1"); DropShadow dropShadow = new
+		 * DropShadow(); dropShadow.setOffsetX(5); dropShadow.setOffsetY(5);
+		 * 
+		 * text.setLayoutY(300); text.setLayoutX(-100); text.setFill(Color.BLUE);
+		 * text.setFont(Font.font("Courier New", FontWeight.BOLD, 28));
+		 * text.setEffect(dropShadow); this.getChildren().add(text);
+		 * 
+		 * int tps = 3000; Timeline timeline = new Timeline(); timeline.getKeyFrames()
+		 * .addAll(new KeyFrame(new Duration(tps), new
+		 * KeyValue(text.translateXProperty(), 800))); timeline.setCycleCount(3);
+		 * timeline.play();
+		 */
+
 	}
 
-	public void generatePlateau(){
-			Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait);
-			this.getChildren().clear();
-			this.getChildren().addAll(plateau.dessinEnvironnement());
+	public void generatePlateau() {
+		Plateau plateau = new Plateau(decalage, tailleCase, decalageTrait);
+		this.getChildren().clear();
+		this.getChildren().addAll(plateau.dessinEnvironnement());
 	}
 
 	@Override

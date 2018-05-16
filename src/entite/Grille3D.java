@@ -92,12 +92,19 @@ public class Grille3D implements Runnable {
 		this.grille = grille;
 	}
 
-
 	public boolean isJouable(int x1, int y1, int x2, int y2, int Joueur) {
-		// TODO si le pion est sur la ligne adverse : return false parce qu'il ne peut plus bouger
-		
+		// TODO si le pion est sur la ligne adverse : return false parce qu'il ne peut
+		// plus bouger
+		int j;
 		if ((x2 < 0 || x2 >= 8) || (y2 < 0 || y2 >= 7))
 			return false;
+		if (Joueur == 0)
+			j = 6;
+		else
+			j = 0;
+		if (j == y1)
+			return false;
+
 		if (grille[x2][y2][0] == 0 || (Joueur == 0 && grille[x2][y2][0] - 4 == grille[x1][y1][0] + 1)
 				|| (Joueur == 1 && grille[x2][y2][0] + 1 == grille[x1][y1][0] - 4))
 			return true;
@@ -121,62 +128,57 @@ public class Grille3D implements Runnable {
 	}
 
 	public void solve(int joueur, double c) {
-		/*if (score(0) >= 1 || score(1) >= 1) {
-			System.out.println(c);
-			affichage2D();
-		} else {*/
-			boolean extraire;
-			for (int i = 0; i < grille.length; i++) {
-				for (int j = 0; j < grille[i].length; j++) {
-					if (grille[i][j][0] != 0)
-						if ((grille[i][j][0] - 1) / 4 == joueur) {
-							for (int k = 0; k < 2; k++) {
-								if (k == 0)
-									extraire = false;
-								else
-									extraire = true;
-								if (isJouable(i, j, i, j + 1, joueur)) {
-									fils.add(deplacement(i, j, i, j + 1, extraire));
-								}
-								if (isJouable(i, j, i + 1, j + 1, joueur)) {
-									fils.add(deplacement(i, j, i + 1, j + 1, extraire));
-								}
-								if (isJouable(i, j, i - 1, j + 1, joueur)) {
-									fils.add(deplacement(i, j, i - 1, j + 1, extraire));
-								}
-								if (isJouable(i, j, i + 1, j, joueur)) {
-									fils.add(deplacement(i, j, i + 1, j, extraire));
-								}
-								if (isJouable(i, j, i + 1, j - 1, joueur)) {
-									fils.add(deplacement(i, j, i + 1, j - 1, extraire));
-								}
-								if (isJouable(i, j, i, j - 1, joueur)) {
-									fils.add(deplacement(i, j, i, j - 1, extraire));
-								}
-								if (isJouable(i, j, i - 1, j - 1, joueur)) {
-									fils.add(deplacement(i, j, i - 1, j - 1, extraire));
-								}
-								if (isJouable(i, j, i - 1, j, joueur)) {
-									fils.add(deplacement(i, j, i - 1, j, extraire));
-								}
+		/*
+		 * if (score(0) >= 1 || score(1) >= 1) { System.out.println(c); affichage2D(); }
+		 * else {
+		 */
+		boolean extraire;
+		for (int i = 0; i < grille.length; i++) {
+			for (int j = 0; j < grille[i].length; j++) {
+				if (grille[i][j][0] != 0)
+					if ((grille[i][j][0] - 1) / 4 == joueur) {
+						for (int k = 0; k < 2; k++) {
+							if (k == 0)
+								extraire = false;
+							else
+								extraire = true;
+							if (isJouable(i, j, i, j + 1, joueur)) {
+								fils.add(deplacement(i, j, i, j + 1, extraire));
+							}
+							if (isJouable(i, j, i + 1, j + 1, joueur)) {
+								fils.add(deplacement(i, j, i + 1, j + 1, extraire));
+							}
+							if (isJouable(i, j, i - 1, j + 1, joueur)) {
+								fils.add(deplacement(i, j, i - 1, j + 1, extraire));
+							}
+							if (isJouable(i, j, i + 1, j, joueur)) {
+								fils.add(deplacement(i, j, i + 1, j, extraire));
+							}
+							if (isJouable(i, j, i + 1, j - 1, joueur)) {
+								fils.add(deplacement(i, j, i + 1, j - 1, extraire));
+							}
+							if (isJouable(i, j, i, j - 1, joueur)) {
+								fils.add(deplacement(i, j, i, j - 1, extraire));
+							}
+							if (isJouable(i, j, i - 1, j - 1, joueur)) {
+								fils.add(deplacement(i, j, i - 1, j - 1, extraire));
+							}
+							if (isJouable(i, j, i - 1, j, joueur)) {
+								fils.add(deplacement(i, j, i - 1, j, extraire));
 							}
 						}
-				}
+					}
 			}
+		}
 
-			/*if (joueur == 0) {
-				joueur = 1;
-			} else
-				joueur = 0;
+		/*
+		 * if (joueur == 0) { joueur = 1; } else joueur = 0;
+		 * 
+		 * for (int z = 0; z < fils.size(); z++) { // fils.get(z).affichage2D(); c++;
+		 * fils.get(z).solve(joueur, c); }
+		 */
 
-			for (int z = 0; z < fils.size(); z++) {
-				// fils.get(z).affichage2D();
-				c++;
-				fils.get(z).solve(joueur, c);
-			}*/
-
-
-//		}
+		// }
 	}
 
 	@Override
