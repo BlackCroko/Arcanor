@@ -16,11 +16,7 @@ public class Heuristique {
 		else if (score0 >= 12)
 			return MIN_NOTE;
 
-		if (joueur == 0)
-			return scoredistance(grille, joueur) + 5 * scoreCache(grille, joueur) + 5 * scoreMange(grille, joueur)
-					+ 15 * score0;
-		else
-			return scoredistance(grille, joueur) + 5 * scoreCache(grille, joueur) + 5 * scoreMange(grille, joueur)
+			return scoredistance(grille, joueur) + 5 * scoreCache(grille, joueur) + 7 * scoreMange(grille, joueur)
 					+ 15 * score1;
 	}
 
