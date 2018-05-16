@@ -22,31 +22,27 @@ public class Heuristique {
 
 				if (joueur == 0 && grille[i][j][0] < 5 && grille[i][j][0] != 0) {
 					if (j == 1)
-						cpt += 2;
+						cpt += 2 + grille[i][j][0];
 					else if (j == 2)
-						cpt += 4;
+						cpt += 4 + grille[i][j][0];
 					else if (j == 3)
-						cpt += 6;
+						cpt += 6 + grille[i][j][0];
 					else if (j == 4)
-						cpt += 8;
+						cpt += 8 + grille[i][j][0];
 					else if (j == 5)
-						cpt += 10;
-					else if (j == 6)
-						cpt += 12;
+						cpt += 10 + grille[i][j][0];
 				}
 				if (joueur == 1 && grille[i][j][0] > 4 && grille[i][j][0] != 0) {
 					if (j == 5)
-						cpt += 2;
+						cpt += 2 + grille[i][j][0];
 					else if (j == 4)
-						cpt += 4;
+						cpt += 4 + grille[i][j][0];
 					else if (j == 3)
-						cpt += 6;
+						cpt += 6 + grille[i][j][0];
 					else if (j == 2)
-						cpt += 8;
+						cpt += 8 + grille[i][j][0];
 					else if (j == 1)
-						cpt += 10;
-					else if (j == 0)
-						cpt += 12;
+						cpt += 10 + grille[i][j][0];
 				}
 			}
 		}
