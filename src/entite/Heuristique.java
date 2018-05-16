@@ -46,7 +46,7 @@ public class Heuristique {
 				if (joueur == 1 && grille[i][j][0] > 4 && grille[i][j][0] != 0) {
 
 					if (j == 5)
-						cpt += 2;
+						cpt += 2 + grille[i][j][];
 					else if (j == 4)
 						cpt += 4;
 					else if (j == 3)

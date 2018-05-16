@@ -9,6 +9,8 @@ public class IA {
 	Grille3D G;
 	boolean extraire = false;
 	Heuristique heuristique = new Heuristique();
+	
+	private int profondeur = 2;
 
 	public IA(Grille grille) {
 		G = new Grille3D(grille);
@@ -19,13 +21,12 @@ public class IA {
 	}
 
 	public CoupJoue solve(int joueur) {
-		
 		Grille3D deplacement;
 		double max = Heuristique.MIN_NOTE;
 		ArrayList<Grille3D> fils = G.generatePossibilite(joueur);
 		deplacement = fils.get(0);
 		for(int i=1; i < fils.size() ; i++){
-			double valeur = this.alphabeta(fils.get(i), joueur, 2);
+			double valeur = this.alphabeta(fils.get(i), joueur, profondeur);
 			if(max < valeur){
 				max = valeur;
 				deplacement = fils.get(i);
