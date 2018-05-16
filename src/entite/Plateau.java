@@ -245,8 +245,6 @@ public class Plateau implements EventHandler<MouseEvent> {
 		score.switchTrait(joueurActuel);
 		ordi = new IA(grille);
 		Heuristique h = new Heuristique();
-		System.out.println(h.noteGrille(ordi.G.getGrille(), 0));
-		System.out.println(h.noteGrille(ordi.G.getGrille(), 1));
 		System.out.println();
 		if (IA) {
 			ordi = new IA(grille);
@@ -257,6 +255,9 @@ public class Plateau implements EventHandler<MouseEvent> {
 				long end = System.nanoTime();
 				System.out.println("le temps de calcul est de " + (end - start) / 1000000 + " secondes");
 				grille.deplacement(coup.getX1(), coup.getY1(), coup.getX2(), coup.getY2(), coup.isExtraire());
+				grille.majPoint();
+				score.setScore(grille.getPointj1(), grille.getPointj2());
+				Victoire(troupe);
 				switchJoueur();
 			}
 		}

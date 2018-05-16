@@ -84,7 +84,7 @@ public class Case extends Rectangle{
 	public boolean isJouable(Pion pion){
 		
 		if (pionPlace == null
-				|| ((pion.getTaille() == pionPlace.getTaille() - 1) && (pion.getJoueur() != pionPlace.getJoueur())))
+				|| ((pion.getTaille() == pionPlace.getTaille() - 1) && !pionPlace.isFin() && (pion.getJoueur() != pionPlace.getJoueur())))
 			return true;
 		else
 			return false;

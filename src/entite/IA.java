@@ -37,7 +37,7 @@ public class IA {
 	private double alphabeta(Grille3D grille, int joueur, int profondeur){
 		double alpha =Heuristique.MIN_NOTE;
 		double beta=Heuristique.MAX_NOTE;
-		return this.max(grille, joueur, profondeur, alpha, beta);
+		return this.min(grille, joueur, profondeur, alpha, beta);
 	}
 
 	/**
