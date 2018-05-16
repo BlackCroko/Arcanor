@@ -8,19 +8,20 @@ public class Heuristique {
 
 	public int noteGrille(int[][][] grille, int joueur) {
 
-		if (joueur == 0)
-			if (score(grille, joueur) >= 12)
-				return MAX_NOTE;
-			else if (score(grille, 1) >= 12)
-				return MIN_NOTE;
-		if (joueur == 1)
-			if (score(grille, joueur) >= 12)
-				return MAX_NOTE;
-			else if (score(grille, 0) >= 12)
-				return MIN_NOTE;
+		int score0 = score(grille, 0);
+		int score1 = score(grille, 1);
 
-		return scoredistance(grille, joueur) + 5 * scoreCache(grille, joueur) + 5 * scoreMange(grille, joueur)
-				+ 15 * score(grille, joueur);
+		if (score1 >= 12)
+			return MAX_NOTE;
+		else if (score0 >= 12)
+			return MIN_NOTE;
+
+		if (joueur == 0)
+			return scoredistance(grille, joueur) + 5 * scoreCache(grille, joueur) + 5 * scoreMange(grille, joueur)
+					+ 15 * score0;
+		else
+			return scoredistance(grille, joueur) + 5 * scoreCache(grille, joueur) + 5 * scoreMange(grille, joueur)
+					+ 15 * score1;
 	}
 
 	public int scoredistance(int[][][] grille, int joueur) {
