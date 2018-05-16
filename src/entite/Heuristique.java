@@ -16,14 +16,48 @@ public class Heuristique {
 		// avoir des points equilibré ++ dernière ligne et regarder si chemin est libre
 		// ou s'il faut faire des détours
 		int cpt = 0;
+		boolean valide = true;
 
 		for (int i = 0; i < grille.length; i++) {
-			for (int j = 0; j < grille[0].length; j++) {
-				if (j > 1 && grille[i][j][0] != 0)
-					if (joueur == 0 && grille[i][j][0] < 5 && grille[i][j][0] != 0) {
-						cpt += j * 2;
-						System.out.println(j);
+			for (int j = 1; j < grille[0].length - 1; j++) {
+
+				if (joueur == 0 && grille[i][j][0] < 5 && grille[i][j][0] != 0) {
+					for (int k = j; k < grille[0].length - 1; k++) {
+						if (grille[i][k + 1][0] != 0) {
+							valide = false;
+						}
 					}
+					if (valide) {
+						if (j == 1)
+							cpt += 2;
+						else if (j == 2)
+							cpt += 4;
+						else if (j == 3)
+							cpt += 6;
+						else if (j == 4)
+							cpt += 8;
+						else if (j == 5)
+							cpt += 10;
+					}
+				}
+				if (joueur == 1 && grille[i][j][0] > 4 && grille[i][j][0] != 0) {
+					for (int k = j; k > 0; k--) {
+						if (grille[i][k - 1][0] != 0)
+							valide = false;
+					}
+					if (valide) {
+						if (j == 5)
+							cpt += 2;
+						else if (j == 4)
+							cpt += 4;
+						else if (j == 3)
+							cpt += 6;
+						else if (j == 2)
+							cpt += 8;
+						else if (j == 1)
+							cpt += 10;
+					}
+				}
 			}
 		}
 
